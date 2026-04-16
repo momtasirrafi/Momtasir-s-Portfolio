@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
+import profilePhoto from "./assets/profile.jpg";
 
 const NAV_LINKS = ["About", "Experience", "Skills", "Projects", "Contact"];
 
@@ -302,7 +303,16 @@ export default function App() {
           </div>
 
           <aside className="hero-panel">
+            <div className="panel-card photo-card">
+              <img
+                src={profilePhoto}
+                alt="MD. Momtasir Rahman Rafi"
+                className="profile-photo"
+              />
+            </div>
+
             <div className="panel-card intro-card">
+
               <p className="card-label">Current focus</p>
               <h2>Documentation, merchant enablement, and requirement quality</h2>
               <p>
