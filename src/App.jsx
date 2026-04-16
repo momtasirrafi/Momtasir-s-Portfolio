@@ -141,11 +141,20 @@ const PROJECTS = [
   },
 ];
 
-function useInView(threshold = 0.18) {
+function useInView(threshold = 0.08) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return undefined;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      setInView(true);
+      return undefined;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -153,7 +162,10 @@ function useInView(threshold = 0.18) {
           observer.disconnect();
         }
       },
-      { threshold }
+      {
+        threshold,
+        rootMargin: "0px 0px -12% 0px",
+      }
     );
 
     if (ref.current) {

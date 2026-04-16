@@ -847,4 +847,10 @@ main,
     transition: none !important;
     scroll-behavior: auto !important;
   }
+
+  .section,
+  .motion-enter {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
