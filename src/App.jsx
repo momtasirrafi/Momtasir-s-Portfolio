@@ -262,7 +262,7 @@ export default function App() {
 
       <main>
         <Section id="about" className="hero-section">
-          <div className="hero-copy">
+          <div className="hero-copy motion-enter">
             <p className="eyebrow">Business Analyst Portfolio</p>
             <h1>
               MD. Momtasir
@@ -303,7 +303,7 @@ export default function App() {
           </div>
 
           <aside className="hero-panel">
-            <div className="panel-card photo-card">
+            <div className="panel-card photo-card motion-enter motion-delay-1">
               <img
                 src={profilePhoto}
                 alt="MD. Momtasir Rahman Rafi"
@@ -311,8 +311,7 @@ export default function App() {
               />
             </div>
 
-            <div className="panel-card intro-card">
-
+            <div className="panel-card intro-card motion-enter motion-delay-2">
               <p className="card-label">Current focus</p>
               <h2>Documentation, merchant enablement, and requirement quality</h2>
               <p>
@@ -322,7 +321,7 @@ export default function App() {
               </p>
             </div>
 
-            <div className="panel-card profile-card">
+            <div className="panel-card profile-card motion-enter motion-delay-3">
               <p className="card-label">Based in</p>
               <h3>Bashundhara, Dhaka</h3>
               <p>Available for business analysis, product, and documentation roles.</p>
@@ -347,8 +346,12 @@ export default function App() {
           </div>
 
           <div className="timeline">
-            {EXPERIENCES.map((exp) => (
-              <article className="timeline-item" key={`${exp.company}-${exp.role}`}>
+            {EXPERIENCES.map((exp, index) => (
+              <article
+                className="timeline-item"
+                key={`${exp.company}-${exp.role}`}
+                style={{ transitionDelay: `${index * 90}ms` }}
+              >
                 <div className="timeline-marker" aria-hidden="true" />
                 <div className="timeline-head">
                   <div>
@@ -378,8 +381,12 @@ export default function App() {
           </div>
 
           <div className="skills-grid">
-            {SKILLS.map((skill) => (
-              <article className="skill-card" key={skill.category}>
+            {SKILLS.map((skill, index) => (
+              <article
+                className="skill-card"
+                key={skill.category}
+                style={{ transitionDelay: `${index * 70}ms` }}
+              >
                 <p className="skill-category">{skill.category}</p>
                 <div className="skill-tags">
                   {skill.items.map((item) => (
@@ -405,7 +412,11 @@ export default function App() {
 
           <div className="projects-grid">
             {PROJECTS.map((project, index) => (
-              <article className="project-card" key={project.title}>
+              <article
+                className="project-card"
+                key={project.title}
+                style={{ transitionDelay: `${index * 90}ms` }}
+              >
                 <span className="project-index">0{index + 1}</span>
                 <p className="project-company">{project.company}</p>
                 <h3>{project.title}</h3>
