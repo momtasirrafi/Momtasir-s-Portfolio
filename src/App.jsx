@@ -18,7 +18,7 @@ const EXPERIENCES = [
   {
     role: "Associate Business Analyst",
     company: "SELISE DIGITAL",
-    period: "April 2025 - December 2026",
+    period: "April 2025 - December 2025",
     points: [
       "Led ERP-based application development with end-to-end requirement alignment.",
       "Collaborated with PM, Development, QA, and UI/UX teams throughout the project lifecycle.",
