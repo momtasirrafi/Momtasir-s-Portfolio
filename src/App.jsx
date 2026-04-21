@@ -316,11 +316,19 @@ export default function App() {
 
           <aside className="hero-panel">
             <div className="panel-card photo-card motion-enter motion-delay-1">
-              <img
-                src={profilePhoto}
-                alt="MD. Momtasir Rahman Rafi"
-                className="profile-photo"
-              />
+              <a
+                href="https://www.linkedin.com/in/md-momtasir-rahman-rafi-11b904243/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Open LinkedIn profile"
+                className="photo-link"
+              >
+                <img
+                  src={profilePhoto}
+                  alt="MD. Momtasir Rahman Rafi"
+                  className="profile-photo"
+                />
+              </a>
             </div>
 
             <div className="panel-card intro-card motion-enter motion-delay-2">

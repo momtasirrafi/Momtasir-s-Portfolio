@@ -372,6 +372,11 @@ main,
   background: linear-gradient(180deg, #172433, #101a27);
 }
 
+.photo-link {
+  display: block;
+  border-radius: 1.35rem;
+}
+
 .profile-photo {
   display: block;
   width: 100%;
