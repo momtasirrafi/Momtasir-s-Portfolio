@@ -480,6 +480,10 @@ main,
   transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease, background 240ms ease;
 }
 
+.timeline-item.expanded {
+  border-color: rgba(242, 166, 90, 0.24);
+}
+
 .timeline-marker {
   position: absolute;
   left: -1.52rem;
@@ -541,6 +545,47 @@ main,
   height: 0.42rem;
   border-radius: 999px;
   background: var(--accent-strong);
+}
+
+.detail-open-button,
+.detail-back-button {
+  margin-top: 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.detail-open-button:hover,
+.detail-back-button:hover {
+  transform: translateY(-2px);
+  border-color: rgba(242, 166, 90, 0.24);
+  background: rgba(242, 166, 90, 0.08);
+}
+
+.experience-detail-box {
+  margin-top: 1.25rem;
+  padding: 1.15rem;
+  border: 1px solid rgba(242, 166, 90, 0.16);
+  border-radius: 1.3rem;
+  background:
+    linear-gradient(180deg, rgba(18, 29, 42, 0.96), rgba(10, 18, 28, 0.92)),
+    radial-gradient(circle at top right, rgba(242, 166, 90, 0.08), transparent 30%);
+}
+
+.experience-detail-copy {
+  display: grid;
+  gap: 0.95rem;
+  margin-top: 1rem;
+}
+
+.experience-detail-copy p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
 }
 
 .skills-grid,
