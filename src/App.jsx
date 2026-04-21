@@ -24,6 +24,13 @@ const EXPERIENCES = [
       "Collaborated with PM, Development, QA, and UI/UX teams throughout the project lifecycle.",
       "Led client-facing walkthroughs, validation sessions, and feedback discussions.",
     ],
+    details: [
+      "Spearheaded requirements gathering and end-to-end alignment for a large-scale, long-running ERP system serving Delta Security, an enterprise-level client with a multi-year, high-budget engagement spanning 6+ years.",
+      "Managed and coordinated cross-functional collaboration across a 15+ member team comprising Developers, QA Engineers, Project Managers, and UI/UX Designers throughout the full project lifecycle.",
+      "Led structured client-facing walkthrough sessions, user acceptance validation, and iterative feedback loops to ensure delivered features aligned with business objectives and stakeholder expectations.",
+      "Translated complex business requirements into clear functional specifications, bridging the gap between Delta Security's operational needs and technical implementation by the development team.",
+      "Contributed to sprint planning and backlog refinement within an agile framework, ensuring consistent delivery velocity across a large and distributed project team.",
+    ],
   },
   {
     role: "Sales Executive",
@@ -33,6 +40,14 @@ const EXPERIENCES = [
       "Drove sales and marketing strategies for online course offerings.",
       "Engaged with potential customers to increase course enrollments.",
       "Developed and implemented effective promotional campaigns.",
+    ],
+    details: [
+      "Drove end-to-end sales and marketing strategies for online course offerings, contributing to measurable growth in course enrollments through targeted outreach and customer engagement.",
+      "Engaged proactively with prospective learners to understand their learning goals, recommending suitable courses and converting leads into enrolled students.",
+      "Organized and executed 3-4 marketing campaigns across Facebook and Email channels, generating 50+ qualified leads and significantly expanding course visibility and audience reach.",
+      "Planned and delivered multiple promotional projects end-to-end, coordinating creative assets, messaging, and distribution timelines to maximize campaign impact across digital channels.",
+      "Leveraged the role as an opportunity to strengthen technical and business skills, gaining hands-on exposure to digital marketing platforms and sales funnel management.",
+      "Added strategic value to the organization's portfolio by contributing insights on customer behavior and market positioning to support future course offerings.",
     ],
   },
   {
@@ -198,6 +213,7 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [expandedExperience, setExpandedExperience] = useState(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -368,7 +384,7 @@ export default function App() {
           <div className="timeline">
             {EXPERIENCES.map((exp, index) => (
               <article
-                className="timeline-item"
+                className={`timeline-item ${expandedExperience === exp.role ? "expanded" : ""}`}
                 key={`${exp.company}-${exp.role}`}
                 style={{ transitionDelay: `${index * 90}ms` }}
               >
@@ -385,6 +401,32 @@ export default function App() {
                     <li key={point}>{point}</li>
                   ))}
                 </ul>
+                {exp.details ? (
+                  expandedExperience === exp.role ? (
+                    <div className="experience-detail-box">
+                      <button
+                        type="button"
+                        className="detail-back-button"
+                        onClick={() => setExpandedExperience(null)}
+                      >
+                        Back
+                      </button>
+                      <div className="experience-detail-copy">
+                        {exp.details.map((detail) => (
+                          <p key={detail}>{detail}</p>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      className="detail-open-button"
+                      onClick={() => setExpandedExperience(exp.role)}
+                    >
+                      View project details
+                    </button>
+                  )
+                ) : null}
               </article>
             ))}
           </div>
