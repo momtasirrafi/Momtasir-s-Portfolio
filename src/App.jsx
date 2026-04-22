@@ -275,8 +275,6 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <div className="page-orb orb-one" aria-hidden="true" />
-      <div className="page-orb orb-two" aria-hidden="true" />
       <div className="page-grid" aria-hidden="true" />
 
       <nav className={scrolled ? "site-nav scrolled" : "site-nav"}>

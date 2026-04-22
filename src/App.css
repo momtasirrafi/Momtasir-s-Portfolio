@@ -59,33 +59,6 @@ textarea {
   overflow: clip;
 }
 
-.page-orb {
-  position: fixed;
-  border-radius: 999px;
-  filter: blur(100px);
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.65;
-  animation: drift 18s ease-in-out infinite alternate;
-}
-
-.orb-one {
-  width: 24rem;
-  height: 24rem;
-  top: -7rem;
-  right: -6rem;
-  background: rgba(242, 166, 90, 0.16);
-}
-
-.orb-two {
-  width: 24rem;
-  height: 24rem;
-  left: -7rem;
-  bottom: 6rem;
-  background: rgba(113, 215, 199, 0.1);
-  animation-duration: 22s;
-}
-
 .page-grid {
   display: none;
 }
@@ -103,7 +76,7 @@ textarea {
 }
 
 .site-nav.scrolled {
-  backdrop-filter: blur(18px);
+  background: transparent;
 }
 
 .nav-logo {
@@ -128,7 +101,6 @@ textarea {
   border-radius: 999px;
   background: rgba(9, 17, 26, 0.78);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(18px);
 }
 
 .nav-links button {
@@ -809,15 +781,6 @@ main,
   }
   50% {
     transform: scale(1.08) translateY(-6px);
-  }
-}
-
-@keyframes drift {
-  from {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  to {
-    transform: translate3d(24px, -18px, 0) scale(1.06);
   }
 }
 
