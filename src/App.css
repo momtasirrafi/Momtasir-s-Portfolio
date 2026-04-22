@@ -25,8 +25,10 @@ body {
   margin: 0;
   color: var(--text);
   background:
+    linear-gradient(180deg, rgba(7, 16, 25, 0.78), rgba(9, 19, 29, 0.9)),
     radial-gradient(circle at top left, rgba(242, 166, 90, 0.12), transparent 24%),
     radial-gradient(circle at 85% 8%, rgba(113, 215, 199, 0.12), transparent 18%),
+    url("./assets/background-mountain.jpg") center / cover fixed no-repeat,
     linear-gradient(180deg, #071019 0%, #09131d 100%);
 }
 
@@ -380,10 +382,11 @@ main,
 .profile-photo {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 4.7;
+  aspect-ratio: 4 / 3.6;
   object-fit: cover;
+  object-position: center 22%;
   border-radius: 1.35rem;
-  transform: scale(1.01);
+  transform: scale(1.06);
   animation: portraitFloat 7s ease-in-out infinite;
 }
 
@@ -802,10 +805,10 @@ main,
 @keyframes portraitFloat {
   0%,
   100% {
-    transform: scale(1.01) translateY(0);
+    transform: scale(1.06) translateY(0);
   }
   50% {
-    transform: scale(1.03) translateY(-8px);
+    transform: scale(1.08) translateY(-6px);
   }
 }
 
