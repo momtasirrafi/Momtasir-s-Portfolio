@@ -59,6 +59,13 @@ const EXPERIENCES = [
       "Analyzed and improved business processes to enhance operational efficiency.",
       "Collaborated with cross-functional teams to support pitch decks.",
     ],
+    details: [
+      "Worked in a technology-focused environment supporting data-driven decision-making and business process improvement initiatives.",
+      "Analyzed operational workflows and identified opportunities to enhance efficiency, structure, and overall business performance.",
+      "Collaborated with cross-functional teams to gather insights, align business needs, and support strategic planning activities.",
+      "Contributed to the preparation of pitch decks and business presentation materials by organizing key information, research findings, and value-driven content.",
+      "Supported the translation of business requirements and operational observations into actionable recommendations for internal and client-facing use.",
+    ],
   },
   {
     role: "Product Designer (Part Time)",
@@ -69,6 +76,13 @@ const EXPERIENCES = [
       "Used Photoshop, Illustrator, and Canva to create high-quality designs.",
       "Contributed to visual branding and marketing materials.",
     ],
+    details: [
+      "Developed business branding assets to strengthen the company's professional identity and market presence.",
+      "Designed core brand materials, including the company logo and business card, ensuring a consistent and recognizable visual language.",
+      "Used Photoshop, Illustrator, and Canva to produce high-quality creative assets aligned with business and branding goals.",
+      "Contributed to category positioning by helping shape the visual identity of the company across branding and promotional materials.",
+      "Supported marketing and communication efforts through design elements that enhanced brand consistency and audience appeal.",
+    ],
   },
   {
     role: "E-Business Model Developer",
@@ -78,6 +92,13 @@ const EXPERIENCES = [
       "Designed a complete e-business model for Smart Shurokkha.",
       "Developed digital strategies for product marketing, sales, and customer engagement.",
       "Integrated e-commerce and online service solutions to support business growth.",
+    ],
+    details: [
+      "Developed a complete e-business model to support Smart Shurokkha's digital growth and long-term business strategy.",
+      "Built product category structures to improve product organization, market positioning, and customer accessibility.",
+      "Designed digital strategies for product marketing, sales, and customer engagement to strengthen online presence and conversion opportunities.",
+      "Integrated e-commerce and online service solutions to support scalable business operations and customer convenience.",
+      "Contributed to aligning business goals with digital execution by creating a more structured and growth-oriented online business framework.",
     ],
   },
 ];
