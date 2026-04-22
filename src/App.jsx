@@ -163,7 +163,7 @@ const PROJECTS = [
   },
   {
     title: "Cross-Domain Client Operations",
-    company: "SELISE DIGITAL",
+    company: "CodeLab FZC LLC",
     description:
       "Managed requirements for a Japanese service-based web application alongside a crypto payment gateway, combining support operations, structured documentation, and fintech coordination.",
     tags: ["Fintech", "Web Services", "Documentation", "Agile/Scrum"],
