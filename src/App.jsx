@@ -545,7 +545,7 @@ export default function App() {
               <div className="contact-list">
                 <a href="mailto:momtasir.rafi@gmail.com">momtasir.rafi@gmail.com</a>
                 <a href="tel:+8801764368102">+880 1764 368102</a>
-                <span>Bashundhara Block k R# 18, Dhaka, Bangladesh</span>
+                <span>Bashundhara Block, k, R# 18, Dhaka, Bangladesh</span>
               </div>
             </div>
 
