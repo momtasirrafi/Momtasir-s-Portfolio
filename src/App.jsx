@@ -601,7 +601,7 @@ export default function App() {
       </main>
 
       <footer className="site-footer">
-        <p>(c) 2026 MD. Momtasir Rahman Rafi. Built with React and Vite.</p>
+        <p>(c) 2026 MD. Momtasir Rahman Rafi.</p>
       </footer>
     </div>
   );
