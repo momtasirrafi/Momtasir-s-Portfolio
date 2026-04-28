@@ -1,0 +1,55 @@
+{
+  "employees": [
+    {
+      "name": "Ayesha Rahman",
+      "email": "ayesha@demo-payroll.com",
+      "designation": "HR Executive",
+      "basicSalary": 52000,
+      "hourlyRate": 340
+    },
+    {
+      "name": "Tanvir Hasan",
+      "email": "tanvir@demo-payroll.com",
+      "designation": "Frontend Developer",
+      "basicSalary": 76000,
+      "hourlyRate": 520
+    },
+    {
+      "name": "Nusrat Jahan",
+      "email": "nusrat@demo-payroll.com",
+      "designation": "Finance Officer",
+      "basicSalary": 64000,
+      "hourlyRate": 430
+    },
+    {
+      "name": "Rafi Ahmed",
+      "email": "rafi@demo-payroll.com",
+      "designation": "Operations Analyst",
+      "basicSalary": 58000,
+      "hourlyRate": 390
+    }
+  ],
+  "attendance": [
+    {
+      "employeeId": 1,
+      "month": "2026-04",
+      "totalWorkingHours": 168,
+      "overtimeHours": 8,
+      "absenceDays": 1
+    },
+    {
+      "employeeId": 2,
+      "month": "2026-04",
+      "totalWorkingHours": 172,
+      "overtimeHours": 12,
+      "absenceDays": 0
+    },
+    {
+      "employeeId": 3,
+      "month": "2026-04",
+      "totalWorkingHours": 160,
+      "overtimeHours": 3,
+      "absenceDays": 2
+    }
+  ]
+}
