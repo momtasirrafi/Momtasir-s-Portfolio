@@ -367,7 +367,7 @@ export default function App() {
       <section className="topbar">
         <div>
         
-          <h1>Payroll </h1>
+          
           <p className="intro">
             Manage employees, enter attendance, calculate monthly payroll, and
             download PDF payslips from a simple SQLite-backed app.
