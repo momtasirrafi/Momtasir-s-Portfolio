@@ -1,15 +1,15 @@
 :root {
   --bg: #f6f8fb;
   --surface: #ffffff;
-  --surface-soft: #eef5f2;
+  --surface-soft: #e9f8f8;
   --ink: #17202a;
   --muted: #637083;
   --line: #dbe3ec;
-  --brand: #24745a;
-  --brand-dark: #17503e;
-  --accent: #d68c34;
-  --notice: #fff4e8;
-  --shadow: 0 18px 45px rgba(40, 52, 68, 0.1);
+  --brand: #12b8bc;
+  --brand-dark: #11204a;
+  --accent: #69717c;
+  --notice: #fff8e8;
+  --shadow: 0 22px 60px rgba(17, 32, 74, 0.12);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
   color: var(--ink);
@@ -22,7 +22,11 @@
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, #f7faf9 0%, #eef3f7 44%, #f8fafc 100%);
+  min-height: 100vh;
+  background:
+    linear-gradient(90deg, rgba(246, 252, 253, 0.96) 0%, rgba(246, 252, 253, 0.88) 42%, rgba(246, 252, 253, 0.42) 100%),
+    url("/assets/payroll-background.jpg") right top / min(58vw, 820px) auto no-repeat,
+    linear-gradient(180deg, #f7fbfc 0%, #eaf8f9 44%, #f8fafc 100%);
 }
 
 button,
@@ -34,7 +38,7 @@ select {
 button {
   border: 0;
   border-radius: 8px;
-  background: var(--brand);
+  background: var(--brand-dark);
   color: #fff;
   padding: 0.82rem 1rem;
   font-weight: 800;
@@ -42,7 +46,7 @@ button {
 }
 
 button:hover {
-  background: var(--brand-dark);
+  background: #0b1635;
 }
 
 .app-shell {
@@ -53,19 +57,22 @@ button:hover {
 
 .topbar {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 230px;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 360px);
   gap: 24px;
   align-items: end;
   padding: 28px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: linear-gradient(135deg, #ffffff, #eef5f2);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(235, 250, 251, 0.9)),
+    linear-gradient(90deg, rgba(18, 184, 188, 0.12), rgba(17, 32, 74, 0.05));
   box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
 }
 
 .eyebrow {
   margin: 0 0 0.6rem;
-  color: var(--brand);
+  color: var(--brand-dark);
   font-size: 0.76rem;
   font-weight: 900;
   letter-spacing: 0.12em;
@@ -81,6 +88,7 @@ h2 {
 h1 {
   font-size: clamp(2.4rem, 5vw, 4.8rem);
   line-height: 0.95;
+  color: var(--brand-dark);
 }
 
 h2 {
@@ -94,6 +102,19 @@ h2 {
   line-height: 1.7;
 }
 
+.brand-area {
+  display: grid;
+  justify-items: end;
+  gap: 18px;
+}
+
+.brand-area img {
+  display: block;
+  width: min(320px, 100%);
+  height: auto;
+  object-fit: contain;
+}
+
 .month-picker,
 .form-grid label {
   display: grid;
@@ -101,6 +122,10 @@ h2 {
   color: var(--muted);
   font-size: 0.86rem;
   font-weight: 800;
+}
+
+.month-picker {
+  width: min(230px, 100%);
 }
 
 input,
@@ -116,10 +141,10 @@ select {
 
 .notice {
   margin: 16px 0 0;
-  border: 1px solid rgba(214, 140, 52, 0.22);
+  border: 1px solid rgba(18, 184, 188, 0.24);
   border-radius: 8px;
   background: var(--notice);
-  color: #845019;
+  color: var(--brand-dark);
   padding: 0.9rem 1rem;
   font-weight: 700;
 }
@@ -144,6 +169,12 @@ select {
   border-radius: 8px;
   background: var(--surface);
   box-shadow: var(--shadow);
+}
+
+.stat-card,
+.panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
 }
 
 .stat-card {
@@ -272,7 +303,8 @@ td small {
 }
 
 .payslip-card {
-  background: linear-gradient(135deg, #ffffff, #f1f7f4);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(235, 250, 251, 0.92));
 }
 
 .payslip-head h2 {
@@ -294,7 +326,7 @@ td small {
 }
 
 .net-pay {
-  background: var(--brand) !important;
+  background: var(--brand-dark) !important;
   color: #fff;
 }
 
@@ -309,6 +341,14 @@ td small {
   .content-grid,
   .breakdown-grid {
     grid-template-columns: 1fr;
+  }
+
+  .brand-area {
+    justify-items: start;
+  }
+
+  .brand-area img {
+    width: min(280px, 100%);
   }
 }
 
