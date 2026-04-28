@@ -1,30 +1,106 @@
-# React + Vite
+# Momtasir's Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A professional personal portfolio website built to present MD. Momtasir Rahman Rafi's background, experience, skills, and selected work in a clean and modern interface.
 
-Currently, two official plugins are available:
+This repository contains the source code for a responsive web portfolio developed with React and Vite. The site is designed to communicate professional credibility clearly for recruiters, collaborators, and potential employers.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Overview
 
-## React Compiler
+The portfolio highlights:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Professional summary and personal brand presentation
+- Work experience with expandable role details
+- Skills and capability areas
+- Selected projects and domain exposure
+- Contact section for professional outreach
+- Sentry integration for frontend error monitoring
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Vite
+- JavaScript and JSX
+- CSS
+- Sentry
 
-## Sentry setup
+## Key Features
 
-Create a `.env` file in the project root and add your DSN:
+- Responsive layout for desktop and mobile devices
+- Dark-themed UI with a branded visual style
+- Expandable experience cards for detailed role descriptions
+- LinkedIn-connected profile image
+- Custom background styling and portfolio-focused presentation
+- Error monitoring support through Sentry
+
+## Project Structure
+
+```text
+src/
+  assets/       Images and static visual assets
+  App.jsx       Main portfolio layout and content
+  App.css       Main UI styling
+  main.jsx      Application entry point and Sentry setup
+```
+
+## Getting Started
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Run the development server
+
+```bash
+npm run dev
+```
+
+### Build for production
+
+```bash
+npm run build
+```
+
+### Preview the production build
+
+```bash
+npm run preview
+```
+
+## Sentry Configuration
+
+To enable Sentry error tracking, create a local environment file in the project root:
 
 ```env
 VITE_SENTRY_DSN=your-sentry-dsn
 ```
 
-Then run the app with:
+Then restart the development server.
 
-```bash
-npm run dev
-```
+## Purpose of This Repository
+
+This repository is intended to serve as:
+
+- A personal branding website
+- A professional project showcase
+- A recruiter-facing portfolio
+- A reference point for technical and business profile presentation
+
+## Customization
+
+You can easily update this portfolio by editing:
+
+- experience content in `src/App.jsx`
+- project and skill data in `src/App.jsx`
+- design and layout styling in `src/App.css`
+- monitoring setup in `src/main.jsx`
+
+## Author
+
+**MD. Momtasir Rahman Rafi**
+
+- Business Analyst
+- Documentation and Process-Oriented Professional
+- Interested in ERP, fintech, product support, and digital business solutions
+

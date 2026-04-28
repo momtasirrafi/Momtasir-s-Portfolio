@@ -429,19 +429,41 @@ async function getTransitions(issueKey) {
 }
 
 async function transitionIssue(issueKey, targetStatus) {
-  const normalizedStatus = String(targetStatus || '').trim().toLowerCase();
+  const normalizedStatus = String(targetStatus || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, ' ');
 
   if (!normalizedStatus) {
     return false;
   }
 
   const transitions = await getTransitions(issueKey);
-  const match = transitions.find(
-    (transition) => String(transition?.name || '').trim().toLowerCase() === normalizedStatus
-  );
+  const match = transitions.find((transition) => {
+    const transitionName = String(transition?.name || '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, ' ');
+    const destinationStatus = String(transition?.to?.name || '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, ' ');
+
+    return transitionName === normalizedStatus || destinationStatus === normalizedStatus;
+  });
 
   if (!match) {
-    throw new Error(`No transition found for status "${targetStatus}"`);
+    const available = transitions
+      .map((transition) => {
+        const transitionName = transition?.name || 'Unknown transition';
+        const destinationStatus = transition?.to?.name || 'Unknown status';
+        return `${transitionName} -> ${destinationStatus}`;
+      })
+      .join(', ');
+
+    throw new Error(
+      `No transition found for status "${targetStatus}". Available transitions: ${available || 'none'}`
+    );
   }
 
   await jiraRequest(

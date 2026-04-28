@@ -1,0 +1,902 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 3 /Kids [6 0 R 8 0 R 10 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 4139 >>
+stream
+BT
+/F2 17 Tf
+0.78 0.12 0.08 rg
+1 0 0 1 72 718 Tm
+(1. Standard Workflow \(Steps to Follow Each Time\)) Tj
+ET
+0.86 0.16 0.13 RG
+1 w
+72 706 m 540 706 l S
+BT
+/F2 11.5 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 72 680 Tm
+(A. Prepare Sentry for Bug Testing) Tj
+ET
+BT
+/F2 10.8 Tf
+0.14 0.14 0.14 rg
+1 0 0 1 72 656 Tm
+(Step 1: Create the right Sentry projects) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 638 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 638 Tm
+(Create a frontend project for the browser app.) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 624 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 624 Tm
+(Create a backend project if your server talks to the) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 610 Tm
+(database.) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 596 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 596 Tm
+(Copy the DSN for each project from Sentry.) Tj
+ET
+BT
+/F2 10.8 Tf
+0.14 0.14 0.14 rg
+1 0 0 1 72 574 Tm
+(Step 2: Add environment variables) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 556 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 556 Tm
+(Store the frontend and backend DSNs in environment files.) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 542 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 542 Tm
+(Set environment values like staging or production.) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 528 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 528 Tm
+(Set a release name so issues can be tied to deployments.) Tj
+ET
+0.94 0.94 0.94 rg
+88 442 452 66 re f
+0.12 0.73 0.58 rg
+88 442 2 66 re f
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 496 Tm
+(VITE_SENTRY_DSN=https://public@example.ingest.sentry.io/123456) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 482 Tm
+(SENTRY_DSN=https://public@example.ingest.sentry.io/654321) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 468 Tm
+(SENTRY_ENVIRONMENT=staging) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 454 Tm
+(SENTRY_RELEASE=webapp-1.0.0) Tj
+ET
+BT
+/F2 10.8 Tf
+0.14 0.14 0.14 rg
+1 0 0 1 72 430 Tm
+(Step 3: Install the SDKs) Tj
+ET
+0.94 0.94 0.94 rg
+88 376 452 38 re f
+0.12 0.73 0.58 rg
+88 376 2 38 re f
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 402 Tm
+(npm install @sentry/react @sentry/browser) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 388 Tm
+(npm install @sentry/node) Tj
+ET
+1 0.97 0.88 rg
+88 328 452 38 re f
+BT
+/F1 10.1 Tf
+0.35 0.24 0.06 rg
+1 0 0 1 96 354 Tm
+(Use the frontend SDK for browser-side issues and the backend SDK for) Tj
+ET
+BT
+/F1 10.1 Tf
+0.35 0.24 0.06 rg
+1 0 0 1 96 340 Tm
+(API and database-related errors.) Tj
+ET
+BT
+/F2 10.8 Tf
+0.14 0.14 0.14 rg
+1 0 0 1 72 316 Tm
+(Step 4: Initialize Sentry in the application) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 298 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 298 Tm
+(Initialize Sentry at frontend startup.) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 284 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 284 Tm
+(Initialize Sentry as early as possible in the backend.) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 270 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 270 Tm
+(Restart the app after adding the DSN and config.) Tj
+ET
+0.94 0.94 0.94 rg
+88 156 452 94 re f
+0.12 0.73 0.58 rg
+88 156 2 94 re f
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 238 Tm
+(Sentry.init\({) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 224 Tm
+(dsn: import.meta.env.VITE_SENTRY_DSN,) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 210 Tm
+(environment: import.meta.env.MODE,) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 196 Tm
+(release: "webapp-1.0.0",) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 182 Tm
+(tracesSampleRate: 1.0,) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 168 Tm
+(}\);) Tj
+ET
+BT
+/F2 11.5 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 72 144 Tm
+(B. Run Bug Tests / Common Testing Patterns) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 120 Tm
+(1.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 120 Tm
+(Test a handled frontend exception with captureException.) Tj
+ET
+BT
+/F1 9 Tf
+0.55 0.55 0.55 rg
+1 0 0 1 230 38 Tm
+(Sentry Bug Testing Manual - Page 1) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 4166 >>
+stream
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 718 Tm
+(2.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 718 Tm
+(Test an unhandled frontend crash with throw new Error\(...\).) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 704 Tm
+(3.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 704 Tm
+(Test an unhandled promise rejection.) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 690 Tm
+(4.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 690 Tm
+(Test a backend route that throws a controlled error.) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 676 Tm
+(5.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 676 Tm
+(Test a database/query failure through the backend.) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 662 Tm
+(6.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 662 Tm
+(Test a failed API flow seen by both frontend and backend.) Tj
+ET
+BT
+/F2 17 Tf
+0.78 0.12 0.08 rg
+1 0 0 1 72 640 Tm
+(2. Detailed Test Procedure) Tj
+ET
+0.86 0.16 0.13 RG
+1 w
+72 628 m 540 628 l S
+BT
+/F2 11.5 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 72 602 Tm
+(A. Frontend Bug Tests) Tj
+ET
+BT
+/F2 10.8 Tf
+0.14 0.14 0.14 rg
+1 0 0 1 72 578 Tm
+(Step 1: Verify the SDK is active) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 560 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 560 Tm
+(Open the web app in a browser.) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 546 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 546 Tm
+(Open DevTools and keep the Network tab visible.) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 532 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 532 Tm
+(Look for requests to sentry.io, ingest.sentry.io, or) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 518 Tm
+(/envelope/ after a test event.) Tj
+ET
+BT
+/F2 10.8 Tf
+0.14 0.14 0.14 rg
+1 0 0 1 72 496 Tm
+(Step 2: Trigger a handled exception) Tj
+ET
+0.94 0.94 0.94 rg
+88 456 452 24 re f
+0.12 0.73 0.58 rg
+88 456 2 24 re f
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 468 Tm
+(Sentry.captureException\(new Error\("Frontend handled test bug"\)\);) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 444 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 444 Tm
+(Confirm that an issue appears in Sentry.) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 430 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 430 Tm
+(Check the stack trace, browser, URL, environment, and) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 416 Tm
+(release.) Tj
+ET
+BT
+/F2 10.8 Tf
+0.14 0.14 0.14 rg
+1 0 0 1 72 394 Tm
+(Step 3: Trigger an unhandled crash) Tj
+ET
+0.94 0.94 0.94 rg
+88 354 452 24 re f
+0.12 0.73 0.58 rg
+88 354 2 24 re f
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 366 Tm
+(throw new Error\("Frontend unhandled crash test"\);) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 342 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 342 Tm
+(Confirm the event is captured separately from the handled) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 328 Tm
+(test.) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 314 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 314 Tm
+(If an error boundary exists, confirm the fallback UI appears.) Tj
+ET
+BT
+/F2 10.8 Tf
+0.14 0.14 0.14 rg
+1 0 0 1 72 292 Tm
+(Step 4: Trigger an unhandled promise rejection) Tj
+ET
+0.94 0.94 0.94 rg
+88 252 452 24 re f
+0.12 0.73 0.58 rg
+88 252 2 24 re f
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 264 Tm
+(Promise.reject\(new Error\("Unhandled promise rejection test"\)\);) Tj
+ET
+BT
+/F2 11.5 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 72 240 Tm
+(B. Backend and Database Bug Tests) Tj
+ET
+BT
+/F2 10.8 Tf
+0.14 0.14 0.14 rg
+1 0 0 1 72 216 Tm
+(Step 5: Trigger a backend exception) Tj
+ET
+0.94 0.94 0.94 rg
+88 148 452 52 re f
+0.12 0.73 0.58 rg
+88 148 2 52 re f
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 188 Tm
+(app.get\("/test-backend-error", \(req, res\) => {) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 174 Tm
+(throw new Error\("Backend crash test"\);) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 160 Tm
+(}\);) Tj
+ET
+BT
+/F2 10.8 Tf
+0.14 0.14 0.14 rg
+1 0 0 1 72 136 Tm
+(Step 6: Trigger a database error through the backend) Tj
+ET
+BT
+/F1 9 Tf
+0.55 0.55 0.55 rg
+1 0 0 1 230 38 Tm
+(Sentry Bug Testing Manual - Page 2) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 4304 >>
+stream
+0.94 0.94 0.94 rg
+88 584 452 136 re f
+0.12 0.73 0.58 rg
+88 584 2 136 re f
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 708 Tm
+(app.get\("/test-db-error", async \(req, res, next\) => {) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 694 Tm
+(try {) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 680 Tm
+(const result = await db.query\("SELECT * FROM missing_table"\);) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 666 Tm
+(res.json\(result.rows\);) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 652 Tm
+(} catch \(error\) {) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 638 Tm
+(Sentry.captureException\(error\);) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 624 Tm
+(next\(error\);) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 610 Tm
+(}) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 596 Tm
+(}\);) Tj
+ET
+1 0.97 0.88 rg
+88 536 452 38 re f
+BT
+/F1 10.1 Tf
+0.35 0.24 0.06 rg
+1 0 0 1 96 562 Tm
+(Sentry does not test the database directly. It captures the database) Tj
+ET
+BT
+/F1 10.1 Tf
+0.35 0.24 0.06 rg
+1 0 0 1 96 548 Tm
+(error when your backend throws or records it.) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 524 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 524 Tm
+(Use safe staging-only failures like a missing table, missing) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 510 Tm
+(column, timeout, or duplicate key test data.) Tj
+ET
+BT
+/F1 11 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 90 496 Tm
+(•) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 496 Tm
+(Do not use destructive production tests.) Tj
+ET
+BT
+/F2 17 Tf
+0.78 0.12 0.08 rg
+1 0 0 1 72 474 Tm
+(3. Verification and Cleanup) Tj
+ET
+0.86 0.16 0.13 RG
+1 w
+72 462 m 540 462 l S
+BT
+/F2 11.5 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 72 436 Tm
+(A. What to Verify in Sentry) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 412 Tm
+(1.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 412 Tm
+(Issue title is clear and grouped correctly.) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 398 Tm
+(2.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 398 Tm
+(Stack trace points to the right source files.) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 384 Tm
+(3.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 384 Tm
+(Environment and release values are present.) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 370 Tm
+(4.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 370 Tm
+(User, tags, and breadcrumbs are visible if configured.) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 356 Tm
+(5.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 356 Tm
+(Frontend and backend failures can be correlated when the API) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 342 Tm
+(fails.) Tj
+ET
+BT
+/F2 11.5 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 72 320 Tm
+(B. Common Safe Context to Add) Tj
+ET
+0.94 0.94 0.94 rg
+88 246 452 52 re f
+0.12 0.73 0.58 rg
+88 246 2 52 re f
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 286 Tm
+(Sentry.setUser\({ id: "123", email: "tester@example.com" }\);) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 272 Tm
+(Sentry.setTag\("area", "checkout"\);) Tj
+ET
+BT
+/F1 10.3 Tf
+0.16 0.22 0.32 rg
+1 0 0 1 96 258 Tm
+(Sentry.setContext\("test_case", { name: "db-timeout-simulation" }\);) Tj
+ET
+BT
+/F2 11.5 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 72 234 Tm
+(C. Final Checklist) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 210 Tm
+(1.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 210 Tm
+(DSN present and SDK installed.) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 196 Tm
+(2.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 196 Tm
+(Frontend and backend initialized.) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 182 Tm
+(3.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 182 Tm
+(Handled and unhandled frontend issues captured.) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 168 Tm
+(4.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 168 Tm
+(Backend and DB-related issues captured.) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 154 Tm
+(5.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 154 Tm
+(Source maps, grouping, and alerts verified.) Tj
+ET
+BT
+/F1 10.8 Tf
+0.1 0.1 0.1 rg
+1 0 0 1 80 140 Tm
+(6.) Tj
+ET
+BT
+/F1 10.6 Tf
+0.12 0.12 0.12 rg
+1 0 0 1 106 140 Tm
+(Temporary crash buttons and test routes removed.) Tj
+ET
+BT
+/F1 9 Tf
+0.55 0.55 0.55 rg
+1 0 0 1 230 38 Tm
+(Sentry Bug Testing Manual - Page 3) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+xref
+0 11
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000128 00000 n 
+0000000198 00000 n 
+0000000273 00000 n 
+0000004464 00000 n 
+0000004600 00000 n 
+0000008818 00000 n 
+0000008954 00000 n 
+0000013310 00000 n 
+trailer
+<< /Size 11 /Root 1 0 R >>
+startxref
+13447
+%%EOF

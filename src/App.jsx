@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
-import profilePhoto from "./assets/profile.jpg";
+import profilePhoto from "./assets/profile-optimized.jpg";
 
 const NAV_LINKS = ["About", "Experience", "Skills", "Projects", "Contact"];
 
@@ -163,7 +163,7 @@ const PROJECTS = [
   },
   {
     title: "Cross-Domain Client Operations",
-    company: "SELISE DIGITAL",
+    company: "CodeLab FZC LLC",
     description:
       "Managed requirements for a Japanese service-based web application alongside a crypto payment gateway, combining support operations, structured documentation, and fintech coordination.",
     tags: ["Fintech", "Web Services", "Documentation", "Agile/Scrum"],
@@ -237,24 +237,40 @@ export default function App() {
   const [expandedExperience, setExpandedExperience] = useState(null);
 
   useEffect(() => {
+    let ticking = false;
+
     const onScroll = () => {
-      setScrolled(window.scrollY > 24);
+      if (ticking) {
+        return;
+      }
 
-      NAV_LINKS.forEach((item) => {
-        const section = document.getElementById(item.toLowerCase());
-        if (!section) return;
+      ticking = true;
 
-        const top = section.offsetTop - 180;
-        const bottom = top + section.offsetHeight;
+      window.requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        setScrolled(scrollY > 24);
 
-        if (window.scrollY >= top && window.scrollY < bottom) {
-          setActiveNav(item);
+        for (const item of NAV_LINKS) {
+          const section = document.getElementById(item.toLowerCase());
+          if (!section) {
+            continue;
+          }
+
+          const top = section.offsetTop - 180;
+          const bottom = top + section.offsetHeight;
+
+          if (scrollY >= top && scrollY < bottom) {
+            setActiveNav(item);
+            break;
+          }
         }
+
+        ticking = false;
       });
     };
 
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -275,8 +291,6 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <div className="page-orb orb-one" aria-hidden="true" />
-      <div className="page-orb orb-two" aria-hidden="true" />
       <div className="page-grid" aria-hidden="true" />
 
       <nav className={scrolled ? "site-nav scrolled" : "site-nav"}>
@@ -364,6 +378,10 @@ export default function App() {
                   src={profilePhoto}
                   alt="MD. Momtasir Rahman Rafi"
                   className="profile-photo"
+                  width="480"
+                  height="585"
+                  decoding="async"
+                  fetchPriority="high"
                 />
               </a>
             </div>
@@ -527,7 +545,7 @@ export default function App() {
               <div className="contact-list">
                 <a href="mailto:momtasir.rafi@gmail.com">momtasir.rafi@gmail.com</a>
                 <a href="tel:+8801764368102">+880 1764 368102</a>
-                <span>Bashundhara, Dhaka, Bangladesh</span>
+                <span>Bashundhara Block, k, R# 18, Dhaka, Bangladesh</span>
               </div>
             </div>
 
@@ -583,7 +601,7 @@ export default function App() {
       </main>
 
       <footer className="site-footer">
-        <p>(c) 2026 MD. Momtasir Rahman Rafi. Built with React and Vite.</p>
+        <p>(c) 2026 MD. Momtasir Rahman Rafi.</p>
       </footer>
     </div>
   );
