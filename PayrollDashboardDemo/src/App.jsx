@@ -20,6 +20,71 @@ const emptyAttendance = {
   absenceDays: 0,
 };
 
+const demoEmployees = [
+  {
+    id: 1,
+    name: "Ayesha Rahman",
+    email: "ayesha@demo-payroll.com",
+    designation: "HR Executive",
+    basic_salary: 52000,
+    hourly_rate: 340,
+  },
+  {
+    id: 2,
+    name: "Tanvir Hasan",
+    email: "tanvir@demo-payroll.com",
+    designation: "Frontend Developer",
+    basic_salary: 76000,
+    hourly_rate: 520,
+  },
+  {
+    id: 3,
+    name: "Nusrat Jahan",
+    email: "nusrat@demo-payroll.com",
+    designation: "Finance Officer",
+    basic_salary: 64000,
+    hourly_rate: 430,
+  },
+  {
+    id: 4,
+    name: "Rafi Ahmed",
+    email: "rafi@demo-payroll.com",
+    designation: "Operations Analyst",
+    basic_salary: 58000,
+    hourly_rate: 390,
+  },
+];
+
+const demoAttendance = [
+  {
+    id: 1,
+    employee_id: 1,
+    employee_name: "Ayesha Rahman",
+    month: DEFAULT_MONTH,
+    total_working_hours: 168,
+    overtime_hours: 8,
+    absence_days: 1,
+  },
+  {
+    id: 2,
+    employee_id: 2,
+    employee_name: "Tanvir Hasan",
+    month: DEFAULT_MONTH,
+    total_working_hours: 172,
+    overtime_hours: 12,
+    absence_days: 0,
+  },
+  {
+    id: 3,
+    employee_id: 3,
+    employee_name: "Nusrat Jahan",
+    month: DEFAULT_MONTH,
+    total_working_hours: 160,
+    overtime_hours: 3,
+    absence_days: 2,
+  },
+];
+
 function formatCurrency(value) {
   return new Intl.NumberFormat("en-BD", {
     style: "currency",
@@ -33,6 +98,51 @@ function formatMonth(value) {
     month: "long",
     year: "numeric",
   }).format(new Date(`${value}-01T00:00:00`));
+}
+
+function calculatePayroll(employee, attendanceEntry) {
+  const basicSalary = Number(employee.basic_salary);
+  const hourlyRate = Number(employee.hourly_rate);
+  const overtimeHours = Number(attendanceEntry.overtime_hours);
+  const absenceDays = Number(attendanceEntry.absence_days);
+  const overtimeAmount = overtimeHours * hourlyRate * 1.5;
+  const deduction = absenceDays * (basicSalary / 30);
+
+  return {
+    attendanceId: attendanceEntry.id,
+    employeeId: employee.id,
+    month: attendanceEntry.month,
+    name: employee.name,
+    email: employee.email,
+    designation: employee.designation,
+    totalWorkingHours: attendanceEntry.total_working_hours,
+    overtimeHours,
+    absenceDays,
+    hourlyRate,
+    basicSalary,
+    overtimeAmount,
+    deduction,
+    netSalary: basicSalary + overtimeAmount - deduction,
+  };
+}
+
+function buildLocalData(month, employeeRows, attendanceRows) {
+  const payrollRows = attendanceRows
+    .filter((entry) => entry.month === month)
+    .map((entry) => {
+      const employee = employeeRows.find((item) => item.id === entry.employee_id);
+      return employee ? calculatePayroll(employee, entry) : null;
+    })
+    .filter(Boolean);
+
+  return {
+    payrollRows,
+    dashboardData: {
+      totalEmployees: employeeRows.length,
+      totalMonthlyPayroll: payrollRows.reduce((sum, row) => sum + row.netSalary, 0),
+      pendingPayrollCount: Math.max(employeeRows.length - payrollRows.length, 0),
+    },
+  };
 }
 
 async function fetchJson(path, options) {
@@ -74,6 +184,7 @@ export default function App() {
   const [selectedPayslipId, setSelectedPayslipId] = useState(null);
   const [notice, setNotice] = useState("");
   const [loading, setLoading] = useState(true);
+  const [demoMode, setDemoMode] = useState(false);
 
   const selectedPayslip = useMemo(
     () => payroll.find((item) => item.attendanceId === selectedPayslipId) || payroll[0],
@@ -82,39 +193,78 @@ export default function App() {
 
   const loadData = useCallback(async () => {
     setLoading(true);
-    const [employeeRows, attendanceRows, payrollRows, dashboardData] =
-      await Promise.all([
+    try {
+      const [employeeRows, attendanceRows, payrollRows, dashboardData] = await Promise.all([
         fetchJson("/employees"),
         fetchJson("/attendance"),
         fetchJson(`/payroll?month=${selectedMonth}`),
         fetchJson(`/dashboard?month=${selectedMonth}`),
       ]);
 
-    setEmployees(employeeRows);
-    setAttendance(attendanceRows);
-    setPayroll(payrollRows);
-    setDashboard(dashboardData);
-    setSelectedPayslipId((currentId) => {
-      if (payrollRows.some((item) => item.attendanceId === currentId)) {
-        return currentId;
-      }
+      setEmployees(employeeRows);
+      setAttendance(attendanceRows);
+      setPayroll(payrollRows);
+      setDashboard(dashboardData);
+      setDemoMode(false);
+      setNotice("");
+      setSelectedPayslipId((currentId) => {
+        if (payrollRows.some((item) => item.attendanceId === currentId)) {
+          return currentId;
+        }
 
-      return payrollRows[0]?.attendanceId || null;
-    });
-    setLoading(false);
+        return payrollRows[0]?.attendanceId || null;
+      });
+    } catch {
+      const { payrollRows, dashboardData } = buildLocalData(
+        selectedMonth,
+        demoEmployees,
+        demoAttendance,
+      );
+
+      setEmployees(demoEmployees);
+      setAttendance(demoAttendance);
+      setPayroll(payrollRows);
+      setDashboard(dashboardData);
+      setDemoMode(true);
+      setNotice("Demo mode is active because the backend API is not running.");
+      setSelectedPayslipId(payrollRows[0]?.attendanceId || null);
+    } finally {
+      setLoading(false);
+    }
   }, [selectedMonth]);
 
   useEffect(() => {
-    loadData().catch((error) => {
-      setNotice(error.message);
-      setLoading(false);
-    });
+    loadData();
   }, [loadData]);
 
   async function handleAddEmployee(event) {
     event.preventDefault();
 
     try {
+      if (demoMode) {
+        const newEmployee = {
+          id: Math.max(...employees.map((employee) => employee.id), 0) + 1,
+          name: employeeForm.name,
+          email: employeeForm.email,
+          designation: employeeForm.designation,
+          basic_salary: Number(employeeForm.basicSalary),
+          hourly_rate: Number(employeeForm.hourlyRate),
+        };
+        const nextEmployees = [...employees, newEmployee];
+        const { payrollRows, dashboardData } = buildLocalData(
+          selectedMonth,
+          nextEmployees,
+          attendance,
+        );
+
+        setEmployees(nextEmployees);
+        setPayroll(payrollRows);
+        setDashboard(dashboardData);
+        setEmployeeForm(emptyEmployee);
+        setNotice("Employee added in browser demo mode.");
+        return;
+      }
+
       await fetchJson("/employees", {
         method: "POST",
         body: JSON.stringify(employeeForm),
@@ -131,6 +281,39 @@ export default function App() {
     event.preventDefault();
 
     try {
+      if (demoMode) {
+        const employee = employees.find(
+          (item) => item.id === Number(attendanceForm.employeeId),
+        );
+        const newEntry = {
+          id: Math.max(...attendance.map((entry) => entry.id), 0) + 1,
+          employee_id: Number(attendanceForm.employeeId),
+          employee_name: employee?.name || "Employee",
+          month: attendanceForm.month,
+          total_working_hours: Number(attendanceForm.totalWorkingHours || 0),
+          overtime_hours: Number(attendanceForm.overtimeHours || 0),
+          absence_days: Number(attendanceForm.absenceDays || 0),
+        };
+        const nextAttendance = [newEntry, ...attendance];
+        const { payrollRows, dashboardData } = buildLocalData(
+          attendanceForm.month,
+          employees,
+          nextAttendance,
+        );
+
+        setAttendance(nextAttendance);
+        setPayroll(payrollRows);
+        setDashboard(dashboardData);
+        setSelectedMonth(attendanceForm.month);
+        setNotice("Attendance captured in browser demo mode.");
+        setAttendanceForm((form) => ({
+          ...emptyAttendance,
+          month: form.month,
+          employeeId: form.employeeId,
+        }));
+        return;
+      }
+
       await fetchJson("/attendance", {
         method: "POST",
         body: JSON.stringify(attendanceForm),
