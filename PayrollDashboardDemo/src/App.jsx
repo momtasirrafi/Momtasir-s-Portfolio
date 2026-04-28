@@ -190,14 +190,17 @@ export default function App() {
             download PDF payslips from a simple SQLite-backed app.
           </p>
         </div>
-        <label className="month-picker">
-          Payroll month
-          <input
-            type="month"
-            value={selectedMonth}
-            onChange={(event) => setSelectedMonth(event.target.value)}
-          />
-        </label>
+        <div className="brand-area">
+          <img src="/assets/payroll-logo.png" alt="Payroll Systems" />
+          <label className="month-picker">
+            Payroll month
+            <input
+              type="month"
+              value={selectedMonth}
+              onChange={(event) => setSelectedMonth(event.target.value)}
+            />
+          </label>
+        </div>
       </section>
 
       {notice ? <p className="notice">{notice}</p> : null}
