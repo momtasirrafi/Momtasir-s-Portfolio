@@ -1,0 +1,166 @@
+{
+  "employees": [
+    {
+      "id": "c2738641-3063-4ae2-9cf7-da5cb456e3b0",
+      "name": "Bashar",
+      "active": true
+    },
+    {
+      "id": "945eec83-2ec4-4199-904e-7a04a35cf554",
+      "name": "Jahid",
+      "active": true
+    },
+    {
+      "id": "3f319006-277e-43c1-b370-2b0b531dfdc2",
+      "name": "Tanvir",
+      "active": true
+    },
+    {
+      "id": "13a78a34-55db-4729-9607-1de49f574e10",
+      "name": "Shoheb",
+      "active": true
+    },
+    {
+      "id": "8aeea3f9-4b9c-47cb-aa16-44ef4f4c201b",
+      "name": "Shukanto",
+      "active": true
+    },
+    {
+      "id": "b95ed53c-07d7-4b90-8340-79fa314ef37d",
+      "name": "Rafi",
+      "active": true
+    },
+    {
+      "id": "af205d9a-e2f8-4dab-ba25-a56e1e4547d4",
+      "name": "Shafwan",
+      "active": true
+    },
+    {
+      "id": "2b25a943-eecf-452a-ac7f-58d21a9723a0",
+      "name": "Arnab",
+      "active": true
+    },
+    {
+      "id": "fa5fb7ef-d26d-4a03-8d20-6d64b585845f",
+      "name": "Faiyaz",
+      "active": true
+    },
+    {
+      "id": "4348408b-c4e2-4df1-a173-97e2e11f27ae",
+      "name": "Alam",
+      "active": true
+    }
+  ],
+  "records": [
+    {
+      "id": "e89ea220-bf5e-41bc-99f3-35720482c5b5",
+      "employeeId": "c2738641-3063-4ae2-9cf7-da5cb456e3b0",
+      "date": "2026-05-01",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "9a20c28b-c1a2-4d1b-9e26-6367fae1c15c",
+      "employeeId": "945eec83-2ec4-4199-904e-7a04a35cf554",
+      "date": "2026-05-01",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "75fab915-7690-491f-93b2-2de7c3564e66",
+      "employeeId": "3f319006-277e-43c1-b370-2b0b531dfdc2",
+      "date": "2026-05-01",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "59e1541e-515c-4215-b3a2-d18c85fe3e2b",
+      "employeeId": "13a78a34-55db-4729-9607-1de49f574e10",
+      "date": "2026-05-01",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "fa88ad19-a9de-4279-a5fa-86ba3440c0a2",
+      "employeeId": "8aeea3f9-4b9c-47cb-aa16-44ef4f4c201b",
+      "date": "2026-05-01",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "332cf758-c7dc-4cd1-b25e-8c525598787a",
+      "employeeId": "b95ed53c-07d7-4b90-8340-79fa314ef37d",
+      "date": "2026-05-01",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "a631b50c-c4b1-4383-b7f6-bbddf4f3e7fa",
+      "employeeId": "af205d9a-e2f8-4dab-ba25-a56e1e4547d4",
+      "date": "2026-05-01",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "aa6be05f-d8c2-4802-bddb-3fd4670a0ff8",
+      "employeeId": "2b25a943-eecf-452a-ac7f-58d21a9723a0",
+      "date": "2026-05-01",
+      "status": "Clocked In",
+      "clockIn": "2026-05-01T06:09:48.616Z",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "dc9f00ea-357d-43de-a156-44f9b7ee1252",
+      "employeeId": "fa5fb7ef-d26d-4a03-8d20-6d64b585845f",
+      "date": "2026-05-01",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "b44677bf-9444-43e4-b545-907d7b5cf40c",
+      "employeeId": "4348408b-c4e2-4df1-a173-97e2e11f27ae",
+      "date": "2026-05-01",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    }
+  ]
+}

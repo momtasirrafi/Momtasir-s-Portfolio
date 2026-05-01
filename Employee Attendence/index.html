@@ -10,7 +10,7 @@
     <main class="app-shell">
       <header class="topbar">
         <div>
-          <p class="eyebrow">Software Company</p>
+          <p class="eyebrow">CodeLab FZC LLC</p>
           <h1>Employee Attendance</h1>
         </div>
         <div class="date-card">
@@ -19,99 +19,215 @@
         </div>
       </header>
 
-      <section class="stats-grid" aria-label="Attendance summary">
-        <article>
-          <span>Total Employees</span>
-          <strong id="totalEmployees">0</strong>
-        </article>
-        <article>
-          <span>Clocked In Today</span>
-          <strong id="clockedInToday">0</strong>
-        </article>
-        <article>
-          <span>On Leave Today</span>
-          <strong id="leaveToday">0</strong>
-        </article>
-        <article>
-          <span>Today Fine</span>
-          <strong id="fineToday">0 BDT</strong>
-        </article>
-      </section>
+      <nav class="panel-tabs" aria-label="Application panels">
+        <button id="employeePanelTab" class="active" type="button">Employee Panel</button>
+        <button id="adminPanelTab" type="button">Admin Panel</button>
+      </nav>
 
-      <section class="work-panel">
-        <div class="panel-heading">
-          <div>
-            <h2>Daily Attendance</h2>
-            <p>Office hours: 8:00 AM to 6:00 PM, Monday to Friday. Saturday and Sunday are weekends.</p>
-          </div>
-          <button id="markMissedBtn" class="ghost-btn" type="button">Apply Missed Clock-In Fine</button>
-        </div>
-
-        <div id="weekendNotice" class="notice hidden">
-          Today is weekend. Attendance actions are paused unless admin records a special working day manually.
-        </div>
-
-        <div id="employeeCards" class="employee-grid"></div>
-      </section>
-
-      <section class="management-grid">
-        <article class="tool-panel">
-          <h2>Add Employee</h2>
-          <form id="employeeForm" class="inline-form">
-            <label>
-              Employee name
-              <input id="employeeName" type="text" placeholder="Enter employee name" autocomplete="off" required />
-            </label>
-            <button type="submit">Add Employee</button>
-          </form>
-        </article>
-
-        <article class="tool-panel">
-          <h2>Admin Report Export</h2>
-          <div class="report-controls">
-            <label>
+      <section id="employeePanel" class="panel-view">
+        <article class="work-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Employee Panel</h2>
+              <p>Choose your name, then manage your attendance and leave.</p>
+            </div>
+            <label class="employee-picker">
               Employee
-              <select id="reportEmployee"></select>
+              <select id="employeePanelSelect"></select>
             </label>
-            <label>
-              From
-              <input id="reportFrom" type="date" />
-            </label>
-            <label>
-              To
-              <input id="reportTo" type="date" />
-            </label>
-            <button id="exportBtn" type="button">Export Excel</button>
+          </div>
+
+          <div id="employeeWeekendNotice" class="notice hidden">
+            Today is weekend. Attendance actions are paused.
+          </div>
+
+          <div class="self-service-grid">
+            <div class="employee-card self-card">
+              <div class="employee-head">
+                <div>
+                  <h3 id="selectedEmployeeName">Employee</h3>
+                  <span id="selectedEmployeeStatus" class="status-pill">Not Started</span>
+                </div>
+              </div>
+              <dl class="time-list">
+                <div>
+                  <dt>Clock In</dt>
+                  <dd id="selfClockIn">--</dd>
+                </div>
+                <div>
+                  <dt>Clock Out</dt>
+                  <dd id="selfClockOut">--</dd>
+                </div>
+                <div>
+                  <dt>Worked</dt>
+                  <dd id="selfWorked">0h</dd>
+                </div>
+              </dl>
+              <div class="action-row">
+                <button id="selfClockInBtn" class="clock-in-btn" type="button">Clock In</button>
+                <button id="selfClockOutBtn" class="clock-out-btn" type="button">Clock Out</button>
+              </div>
+              <div class="leave-row">
+                <button id="selfHalfLeaveBtn" class="half-leave-btn" type="button">Half Day Leave</button>
+                <button id="selfFullLeaveBtn" class="full-leave-btn" type="button">Full Day Leave</button>
+              </div>
+            </div>
+
+            <div class="personal-summary">
+              <article>
+                <span>Total Leave</span>
+                <strong id="selfTotalLeave">0 days</strong>
+              </article>
+              <article>
+                <span>Total Fine</span>
+                <strong id="selfTotalFine">0 BDT</strong>
+              </article>
+              <article>
+                <span>Completed Days</span>
+                <strong id="selfCompletedDays">0</strong>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>My Records</h2>
+              <p>Your latest attendance, leave, and fine entries.</p>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Clock In</th>
+                  <th>Clock Out</th>
+                  <th>Hours</th>
+                  <th>Fine</th>
+                </tr>
+              </thead>
+              <tbody id="selfRecordsTable"></tbody>
+            </table>
           </div>
         </article>
       </section>
 
-      <section class="work-panel">
-        <div class="panel-heading">
-          <div>
-            <h2>Recent Records</h2>
-            <p>Latest attendance, leave, and fine entries.</p>
+      <section id="adminPanel" class="panel-view hidden">
+        <section class="stats-grid" aria-label="Attendance summary">
+          <article>
+            <span>Total Employees</span>
+            <strong id="totalEmployees">0</strong>
+          </article>
+          <article>
+            <span>Clocked In Today</span>
+            <strong id="clockedInToday">0</strong>
+          </article>
+          <article>
+            <span>On Leave Today</span>
+            <strong id="leaveToday">0</strong>
+          </article>
+          <article>
+            <span>Today Fine</span>
+            <strong id="fineToday">0 BDT</strong>
+          </article>
+        </section>
+
+        <section class="work-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Admin Attendance View</h2>
+              <p>Office hours: 8:00 AM to 6:00 PM, Monday to Friday. Saturday and Sunday are weekends.</p>
+            </div>
+            <button id="markMissedBtn" class="ghost-btn" type="button">Apply Missed Clock-In Fine</button>
           </div>
-          <button id="clearDemoBtn" class="danger-btn" type="button">Reset Local Data</button>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Employee</th>
-                <th>Status</th>
-                <th>Clock In</th>
-                <th>Clock Out</th>
-                <th>Hours</th>
-                <th>Fine</th>
-              </tr>
-            </thead>
-            <tbody id="recordsTable"></tbody>
-          </table>
-        </div>
+
+          <div id="weekendNotice" class="notice hidden">
+            Today is weekend. Attendance actions are paused unless admin records a special working day manually.
+          </div>
+
+          <div id="employeeCards" class="employee-grid"></div>
+        </section>
+
+        <section class="management-grid">
+          <article class="tool-panel">
+            <h2>Add Employee</h2>
+            <form id="employeeForm" class="inline-form">
+              <label>
+                Employee name
+                <input id="employeeName" type="text" placeholder="Enter employee name" autocomplete="off" required />
+              </label>
+              <button type="submit">Add Employee</button>
+            </form>
+          </article>
+
+          <article class="tool-panel">
+            <h2>Admin Report Export</h2>
+            <div class="report-controls">
+              <label>
+                Employee
+                <select id="reportEmployee"></select>
+              </label>
+              <label>
+                From
+                <input id="reportFrom" type="date" />
+              </label>
+              <label>
+                To
+                <input id="reportTo" type="date" />
+              </label>
+              <button id="exportBtn" type="button">Export Excel</button>
+            </div>
+          </article>
+        </section>
+
+        <section class="work-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Recent Records</h2>
+              <p>Latest attendance, leave, and fine entries.</p>
+            </div>
+            <button id="clearDemoBtn" class="danger-btn" type="button">Reset Database</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Employee</th>
+                  <th>Status</th>
+                  <th>Clock In</th>
+                  <th>Clock Out</th>
+                  <th>Hours</th>
+                  <th>Fine</th>
+                </tr>
+              </thead>
+              <tbody id="recordsTable"></tbody>
+            </table>
+          </div>
+        </section>
       </section>
     </main>
+
+    <div id="adminPasswordModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="adminPasswordTitle">
+      <form id="adminPasswordForm" class="password-modal">
+        <div>
+          <p class="eyebrow">Admin Access</p>
+          <h2 id="adminPasswordTitle">Enter Password</h2>
+        </div>
+        <label>
+          Password
+          <input id="adminPasswordInput" type="password" inputmode="numeric" autocomplete="current-password" placeholder="Enter admin password" />
+        </label>
+        <p id="adminPasswordError" class="modal-error hidden">Wrong password. Please try again.</p>
+        <div class="modal-actions">
+          <button id="adminPasswordCancel" class="ghost-btn" type="button">Cancel</button>
+          <button type="submit">Unlock Admin</button>
+        </div>
+      </form>
+    </div>
 
     <template id="employeeCardTemplate">
       <article class="employee-card">

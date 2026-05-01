@@ -126,6 +126,45 @@ h3 {
   font-size: 1.35rem;
 }
 
+.panel-tabs {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(140px, 1fr));
+  gap: 6px;
+  margin-bottom: 18px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #e8eff4;
+}
+
+.panel-tabs button {
+  min-height: 42px;
+  background: transparent;
+  color: #405064;
+}
+
+.panel-tabs button.active {
+  background: var(--surface);
+  color: var(--primary-dark);
+  box-shadow: 0 8px 18px rgba(31, 49, 69, 0.08);
+}
+
+.panel-view {
+  animation: panelIn 180ms ease;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -191,11 +230,53 @@ h3 {
   gap: 14px;
 }
 
+.employee-picker {
+  width: min(320px, 100%);
+}
+
+.self-service-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 0.9fr;
+  gap: 14px;
+  align-items: stretch;
+}
+
 .employee-card {
   padding: 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fbfdff;
+}
+
+.self-card {
+  background: #ffffff;
+}
+
+.personal-summary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.personal-summary article {
+  display: grid;
+  align-content: center;
+  min-height: 94px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfdff;
+}
+
+.personal-summary span {
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.personal-summary strong {
+  margin-top: 6px;
+  font-size: 1.75rem;
 }
 
 .employee-head {
@@ -375,6 +456,64 @@ tr:last-child td {
   text-align: center;
 }
 
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.52);
+  backdrop-filter: blur(4px);
+}
+
+.modal-backdrop.hidden {
+  display: none;
+}
+
+.password-modal {
+  width: min(430px, 100%);
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.28);
+}
+
+.password-modal h2 {
+  margin-bottom: 18px;
+  font-size: 1.45rem;
+}
+
+.password-modal input {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.modal-error {
+  margin: 10px 0 0;
+  color: var(--danger);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.modal-actions button {
+  min-height: 42px;
+  padding: 0 16px;
+}
+
+.modal-actions button[type="submit"] {
+  background: var(--primary);
+  color: #fff;
+}
+
 @media (max-width: 850px) {
   .topbar,
   .panel-heading {
@@ -387,6 +526,7 @@ tr:last-child td {
 
   .stats-grid,
   .management-grid,
+  .self-service-grid,
   .report-controls {
     grid-template-columns: 1fr;
   }
@@ -402,6 +542,10 @@ tr:last-child td {
   .tool-panel,
   .stats-grid article {
     padding: 14px;
+  }
+
+  .panel-tabs {
+    display: grid;
   }
 
   .action-row,
