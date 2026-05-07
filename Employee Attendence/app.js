@@ -93,6 +93,7 @@ let state = createDefaultState();
 let activePanel = "employee";
 let pendingRemoveEmployeeId = "";
 let isLoggedIn = sessionStorage.getItem("attendance-login") === "true";
+let databaseAvailable = false;
 
 function createDefaultState() {
   return {
@@ -111,6 +112,7 @@ async function loadStateFromDatabase() {
     const response = await fetch("/api/db");
     if (!response.ok) throw new Error("Database load failed");
     state = await response.json();
+    databaseAvailable = true;
     state.settings = {
       ...DEFAULT_SETTINGS,
       ...(state.settings || {}),
@@ -118,6 +120,15 @@ async function loadStateFromDatabase() {
     migrateLegacyLocalStorage();
   } catch (error) {
     console.error(error);
+    databaseAvailable = false;
+    const saved = localStorage.getItem(LEGACY_STORAGE_KEY);
+    if (saved) {
+      state = JSON.parse(saved);
+      state.settings = {
+        ...DEFAULT_SETTINGS,
+        ...(state.settings || {}),
+      };
+    }
   }
 }
 
@@ -139,6 +150,9 @@ function migrateLegacyLocalStorage() {
 }
 
 async function saveState() {
+  localStorage.setItem(LEGACY_STORAGE_KEY, JSON.stringify(state));
+  if (!databaseAvailable) return;
+
   try {
     await fetch("/api/db", {
       method: "PUT",
