@@ -1,7 +1,16 @@
 const LEGACY_STORAGE_KEY = "employee-attendance-system-v1";
+const LOGIN_USER_ID = "CodeLab";
+const LOGIN_PASSWORD = "Admin";
 const ADMIN_PASSWORD = "1234";
-const WORKDAY_HOURS = 10;
-const MISSED_CLOCK_IN_FINE = 50;
+const DEFAULT_SETTINGS = {
+  checkInTime: "08:00",
+  checkOutTime: "18:00",
+  requiredHours: 10,
+  missedClockInFine: 20,
+  missedFineActionEnabled: true,
+  missedClockOutDeadline: "12:00 PM",
+  missedClockOutFine: 20,
+};
 const DEFAULT_EMPLOYEES = [
   "Bashar",
   "Jahid",
@@ -15,6 +24,13 @@ const DEFAULT_EMPLOYEES = [
 ];
 
 const elements = {
+  loginScreen: document.querySelector("#loginScreen"),
+  appShell: document.querySelector("#appShell"),
+  loginForm: document.querySelector("#loginForm"),
+  loginUserId: document.querySelector("#loginUserId"),
+  loginPassword: document.querySelector("#loginPassword"),
+  loginError: document.querySelector("#loginError"),
+  logoutBtn: document.querySelector("#logoutBtn"),
   todayLabel: document.querySelector("#todayLabel"),
   clockLabel: document.querySelector("#clockLabel"),
   employeePanelTab: document.querySelector("#employeePanelTab"),
@@ -26,6 +42,10 @@ const elements = {
   adminPasswordInput: document.querySelector("#adminPasswordInput"),
   adminPasswordError: document.querySelector("#adminPasswordError"),
   adminPasswordCancel: document.querySelector("#adminPasswordCancel"),
+  removeEmployeeModal: document.querySelector("#removeEmployeeModal"),
+  removeEmployeeForm: document.querySelector("#removeEmployeeForm"),
+  removeEmployeeName: document.querySelector("#removeEmployeeName"),
+  removeEmployeeCancel: document.querySelector("#removeEmployeeCancel"),
   employeePanelSelect: document.querySelector("#employeePanelSelect"),
   employeeWeekendNotice: document.querySelector("#employeeWeekendNotice"),
   selectedEmployeeName: document.querySelector("#selectedEmployeeName"),
@@ -56,14 +76,27 @@ const elements = {
   recordsTable: document.querySelector("#recordsTable"),
   weekendNotice: document.querySelector("#weekendNotice"),
   markMissedBtn: document.querySelector("#markMissedBtn"),
+  officeRuleText: document.querySelector("#officeRuleText"),
+  rulesForm: document.querySelector("#rulesForm"),
+  ruleCheckIn: document.querySelector("#ruleCheckIn"),
+  ruleCheckOut: document.querySelector("#ruleCheckOut"),
+  ruleRequiredHours: document.querySelector("#ruleRequiredHours"),
+  ruleFine: document.querySelector("#ruleFine"),
+  ruleClockOutDeadline: document.querySelector("#ruleClockOutDeadline"),
+  ruleClockOutFine: document.querySelector("#ruleClockOutFine"),
+  missedFineActionToggle: document.querySelector("#missedFineActionToggle"),
+  missedFineActionLabel: document.querySelector("#missedFineActionLabel"),
   clearDemoBtn: document.querySelector("#clearDemoBtn"),
 };
 
 let state = createDefaultState();
 let activePanel = "employee";
+let pendingRemoveEmployeeId = "";
+let isLoggedIn = sessionStorage.getItem("attendance-login") === "true";
 
 function createDefaultState() {
   return {
+    settings: { ...DEFAULT_SETTINGS },
     employees: DEFAULT_EMPLOYEES.map((name, index) => ({
       id: `employee-${index + 1}`,
       name,
@@ -78,6 +111,10 @@ async function loadStateFromDatabase() {
     const response = await fetch("/api/db");
     if (!response.ok) throw new Error("Database load failed");
     state = await response.json();
+    state.settings = {
+      ...DEFAULT_SETTINGS,
+      ...(state.settings || {}),
+    };
     migrateLegacyLocalStorage();
   } catch (error) {
     console.error(error);
@@ -91,7 +128,10 @@ function migrateLegacyLocalStorage() {
   try {
     const legacyState = JSON.parse(saved);
     if (!Array.isArray(legacyState.employees) || !Array.isArray(legacyState.records)) return;
-    state = legacyState;
+    state = {
+      ...legacyState,
+      settings: { ...DEFAULT_SETTINGS, ...(legacyState.settings || {}) },
+    };
     saveState();
   } catch (error) {
     console.error(error);
@@ -180,9 +220,10 @@ function calculateHours(record) {
 function statusLabel(record) {
   if (record.leaveType === "full") return "Full Day Leave";
   if (record.leaveType === "half") return "Half Day Leave";
-  if (record.clockOut) return calculateHours(record) >= WORKDAY_HOURS ? "Completed" : "Short Hours";
+  if (isFineActionEnabled() && record.missedClockOutFineApplied) return "Missed Clock-Out";
+  if (record.clockOut) return calculateHours(record) >= getRuleNumber(state.settings.requiredHours, DEFAULT_SETTINGS.requiredHours) ? "Completed" : "Short Hours";
   if (record.clockIn) return "Clocked In";
-  if (record.fine > 0) return "Missed Clock-In";
+  if (isFineActionEnabled() && record.fine > 0) return "Missed Clock-In";
   return "Not Started";
 }
 
@@ -227,7 +268,7 @@ function clockOut(employeeId) {
 }
 
 function applyMissedClockInFines() {
-  if (isWeekend()) return;
+  if (isWeekend() || !isFineActionEnabled()) return;
 
   state.employees
     .filter((employee) => employee.active)
@@ -235,7 +276,8 @@ function applyMissedClockInFines() {
       const record = getTodayRecord(employee.id);
       if (!record.clockIn && !record.leaveType) {
         record.status = "Missed Clock-In";
-        record.fine = MISSED_CLOCK_IN_FINE;
+        record.fine = getRuleNumber(state.settings.missedClockInFine, DEFAULT_SETTINGS.missedClockInFine);
+        record.missedClockInFineApplied = true;
         record.note = "Employee did not clock in.";
       }
     });
@@ -266,6 +308,41 @@ function removeEmployee(employeeId) {
   render();
 }
 
+function openRemoveEmployeeModal(employeeId) {
+  const employee = state.employees.find((item) => item.id === employeeId);
+  if (!employee) return;
+
+  pendingRemoveEmployeeId = employeeId;
+  elements.removeEmployeeName.textContent = employee.name;
+  elements.removeEmployeeModal.classList.remove("hidden");
+}
+
+function closeRemoveEmployeeModal() {
+  pendingRemoveEmployeeId = "";
+  elements.removeEmployeeModal.classList.add("hidden");
+}
+
+function applyMissedClockOutFines() {
+  if (isWeekend() || !isFineActionEnabled()) return;
+
+  const deadline = parseRuleTimeToDate(state.settings.missedClockOutDeadline);
+  if (!deadline || new Date() < deadline) return;
+
+  let changed = false;
+  const today = formatDate();
+  state.records
+    .filter((record) => record.date === today && record.clockIn && !record.clockOut && !record.leaveType && !record.missedClockOutFineApplied)
+    .forEach((record) => {
+      record.status = "Missed Clock-Out";
+      record.fine = Number(record.fine || 0) + getRuleNumber(state.settings.missedClockOutFine, DEFAULT_SETTINGS.missedClockOutFine);
+      record.missedClockOutFineApplied = true;
+      record.note = "Employee did not clock out before deadline.";
+      changed = true;
+    });
+
+  if (changed) saveState();
+}
+
 function getActiveEmployees() {
   return state.employees.filter((employee) => employee.active);
 }
@@ -283,6 +360,75 @@ function getLeaveDays(record) {
   if (record.leaveType === "half") return 0.5;
   if (record.leaveType === "full") return 1;
   return 0;
+}
+
+function formatLeaveDays(record) {
+  const leaveDays = getLeaveDays(record);
+  return leaveDays ? leaveDays.toString() : "--";
+}
+
+function getRuleNumber(value, fallback) {
+  if (value === "" || value === null || value === undefined) return fallback;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function parseRuleTimeToDate(value) {
+  if (!value) return null;
+  const normalized = String(value).trim().toUpperCase().replace(/\s+/g, "");
+  const match = normalized.match(/^(\d{1,2})(?::(\d{2}))?(AM|PM)?$/);
+  if (!match) return null;
+
+  let hour = Number(match[1]);
+  const minute = Number(match[2] || 0);
+  const period = match[3];
+  if (!Number.isFinite(hour) || !Number.isFinite(minute)) return null;
+  if (period === "PM" && hour < 12) hour += 12;
+  if (period === "AM" && hour === 12) hour = 0;
+  if (hour > 23 || minute > 59) return null;
+
+  const date = new Date();
+  date.setHours(hour, minute, 0, 0);
+  return date;
+}
+
+function isFineActionEnabled() {
+  return Boolean(state.settings?.missedFineActionEnabled);
+}
+
+function formatRuleTime(value) {
+  if (!value) return "Not set";
+  const parsedDate = parseRuleTimeToDate(value);
+  if (parsedDate) {
+    return new Intl.DateTimeFormat("en-BD", {
+      hour: "numeric",
+      minute: "2-digit",
+    }).format(parsedDate);
+  }
+  if (!String(value).includes(":")) return value;
+  const [hour, minute] = String(value).split(":").map(Number);
+  if (!Number.isFinite(hour) || !Number.isFinite(minute)) return value;
+  const date = new Date();
+  date.setHours(hour, minute, 0, 0);
+  return new Intl.DateTimeFormat("en-BD", {
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(date);
+}
+
+function updateRules(event) {
+  event.preventDefault();
+  state.settings = {
+    checkInTime: elements.ruleCheckIn.value || DEFAULT_SETTINGS.checkInTime,
+    checkOutTime: elements.ruleCheckOut.value || DEFAULT_SETTINGS.checkOutTime,
+    requiredHours: elements.ruleRequiredHours.value,
+    missedClockInFine: elements.ruleFine.value,
+    missedFineActionEnabled: elements.missedFineActionToggle.checked,
+    missedClockOutDeadline: elements.ruleClockOutDeadline.value || DEFAULT_SETTINGS.missedClockOutDeadline,
+    missedClockOutFine: elements.ruleClockOutFine.value,
+  };
+  saveState();
+  render();
 }
 
 function renderPanelTabs() {
@@ -313,6 +459,9 @@ function exportReport() {
   const rows = state.records
     .filter((record) => (employeeId === "all" || record.employeeId === employeeId) && record.date >= from && record.date <= to)
     .sort((a, b) => a.date.localeCompare(b.date));
+  const fullDayLeaveCount = rows.filter((record) => record.leaveType === "full").length;
+  const halfDayLeaveCount = rows.filter((record) => record.leaveType === "half").length;
+  const totalLeaveDays = rows.reduce((sum, record) => sum + getLeaveDays(record), 0);
 
   const tableRows = rows
     .map((record) => {
@@ -322,11 +471,12 @@ function exportReport() {
           <td>${record.date}</td>
           <td>${escapeHtml(getEmployeeName(record.employeeId))}</td>
           <td>${statusLabel(record)}</td>
-          <td>${record.clockIn ? formatTime(new Date(record.clockIn)) : ""}</td>
-          <td>${record.clockOut ? formatTime(new Date(record.clockOut)) : ""}</td>
-          <td>${hours.toFixed(2)}</td>
-          <td>${record.fine}</td>
-        </tr>`;
+            <td>${record.clockIn ? formatTime(new Date(record.clockIn)) : ""}</td>
+            <td>${record.clockOut ? formatTime(new Date(record.clockOut)) : ""}</td>
+            <td>${hours.toFixed(2)}</td>
+            <td>${getLeaveDays(record)}</td>
+            <td>${isFineActionEnabled() ? record.fine : 0}</td>
+          </tr>`;
     })
     .join("");
 
@@ -337,12 +487,22 @@ function exportReport() {
         <table border="1">
           <thead>
             <tr>
+              <th colspan="2">Full Day Leave Count</th>
+              <td>${fullDayLeaveCount}</td>
+              <th colspan="2">Half Day Leave Count</th>
+              <td>${halfDayLeaveCount}</td>
+              <th>Total Leave Days</th>
+              <td>${totalLeaveDays}</td>
+            </tr>
+            <tr></tr>
+            <tr>
               <th>Date</th>
               <th>Employee</th>
               <th>Status</th>
               <th>Clock In</th>
               <th>Clock Out</th>
               <th>Worked Hours</th>
+              <th>Leave Days</th>
               <th>Fine BDT</th>
             </tr>
           </thead>
@@ -396,7 +556,7 @@ function renderEmployeeCards() {
       article.querySelector(".clock-out-btn").addEventListener("click", () => clockOut(employee.id));
       article.querySelector(".half-leave-btn").addEventListener("click", () => setLeave(employee.id, "half"));
       article.querySelector(".full-leave-btn").addEventListener("click", () => setLeave(employee.id, "full"));
-      article.querySelector(".remove-btn").addEventListener("click", () => removeEmployee(employee.id));
+      article.querySelector(".remove-btn").addEventListener("click", () => openRemoveEmployeeModal(employee.id));
 
       elements.employeeCards.appendChild(card);
     });
@@ -457,7 +617,7 @@ function renderEmployeePanel() {
   const status = statusLabel(record);
   const personalRecords = state.records.filter((item) => item.employeeId === employee.id);
   const totalLeave = personalRecords.reduce((sum, item) => sum + getLeaveDays(item), 0);
-  const totalFine = personalRecords.reduce((sum, item) => sum + Number(item.fine || 0), 0);
+  const totalFine = isFineActionEnabled() ? personalRecords.reduce((sum, item) => sum + Number(item.fine || 0), 0) : 0;
   const completedDays = personalRecords.filter((item) => statusLabel(item) === "Completed").length;
 
   elements.selectedEmployeeName.textContent = employee.name;
@@ -493,13 +653,14 @@ function renderSelfRecords(employeeId) {
               <td>${record.date}</td>
               <td>${statusLabel(record)}</td>
               <td>${record.clockIn ? formatTime(new Date(record.clockIn)) : "--"}</td>
-              <td>${record.clockOut ? formatTime(new Date(record.clockOut)) : "--"}</td>
-              <td>${hours.toFixed(1)}h</td>
-              <td>${record.fine ? `${record.fine} BDT` : "--"}</td>
-            </tr>`;
+                <td>${record.clockOut ? formatTime(new Date(record.clockOut)) : "--"}</td>
+                <td>${hours.toFixed(1)}h</td>
+                <td>${formatLeaveDays(record)}</td>
+                <td>${isFineActionEnabled() && record.fine ? `${record.fine} BDT` : "--"}</td>
+              </tr>`;
         })
         .join("")
-    : `<tr><td colspan="6" class="empty-state">No records yet.</td></tr>`;
+    : `<tr><td colspan="7" class="empty-state">No records yet.</td></tr>`;
 }
 
 function renderRecordsTable() {
@@ -518,13 +679,14 @@ function renderRecordsTable() {
               <td>${escapeHtml(getEmployeeName(record.employeeId))}</td>
               <td>${statusLabel(record)}</td>
               <td>${record.clockIn ? formatTime(new Date(record.clockIn)) : "--"}</td>
-              <td>${record.clockOut ? formatTime(new Date(record.clockOut)) : "--"}</td>
-              <td>${hours.toFixed(1)}h</td>
-              <td>${record.fine ? `${record.fine} BDT` : "--"}</td>
-            </tr>`;
+                <td>${record.clockOut ? formatTime(new Date(record.clockOut)) : "--"}</td>
+                <td>${hours.toFixed(1)}h</td>
+                <td>${formatLeaveDays(record)}</td>
+                <td>${isFineActionEnabled() && record.fine ? `${record.fine} BDT` : "--"}</td>
+              </tr>`;
         })
         .join("")
-    : `<tr><td colspan="7" class="empty-state">No records yet.</td></tr>`;
+    : `<tr><td colspan="8" class="empty-state">No records yet.</td></tr>`;
 }
 
 function renderStats() {
@@ -533,22 +695,75 @@ function renderStats() {
   elements.totalEmployees.textContent = getActiveEmployees().length;
   elements.clockedInToday.textContent = todayRecords.filter((record) => record.clockIn).length;
   elements.leaveToday.textContent = todayRecords.filter((record) => record.leaveType).length;
-  elements.fineToday.textContent = `${todayRecords.reduce((sum, record) => sum + Number(record.fine || 0), 0)} BDT`;
+  const fineTotal = isFineActionEnabled() ? todayRecords.reduce((sum, record) => sum + Number(record.fine || 0), 0) : 0;
+  elements.fineToday.textContent = `${fineTotal} BDT`;
+}
+
+function renderRules() {
+  const settings = {
+    ...DEFAULT_SETTINGS,
+    ...(state.settings || {}),
+  };
+  state.settings = settings;
+  const isEditingRules = elements.rulesForm.contains(document.activeElement);
+  if (!isEditingRules) {
+    elements.ruleCheckIn.value = settings.checkInTime;
+    elements.ruleCheckOut.value = settings.checkOutTime;
+    elements.ruleRequiredHours.value = settings.requiredHours;
+    elements.ruleFine.value = settings.missedClockInFine;
+    elements.ruleClockOutDeadline.value = settings.missedClockOutDeadline;
+    elements.ruleClockOutFine.value = settings.missedClockOutFine;
+  }
+  elements.missedFineActionToggle.checked = isFineActionEnabled();
+  elements.missedFineActionLabel.textContent = isFineActionEnabled() ? "On" : "Off";
+  elements.officeRuleText.textContent = `Office hours: ${formatRuleTime(settings.checkInTime)} to ${formatRuleTime(settings.checkOutTime)}. Required work: ${settings.requiredHours} hours. Missed clock-in fine: ${settings.missedClockInFine} BDT. Missed clock-out deadline: ${formatRuleTime(settings.missedClockOutDeadline)}. Saturday and Sunday are weekends.`;
+  elements.markMissedBtn.textContent = isFineActionEnabled() ? `Apply ${settings.missedClockInFine} BDT Missed Clock-In Fine` : "Missed Clock-In Fine Off";
 }
 
 function render() {
+  elements.loginScreen.classList.toggle("hidden", isLoggedIn);
+  elements.appShell.classList.toggle("hidden", !isLoggedIn);
+  if (!isLoggedIn) return;
+
   elements.todayLabel.textContent = formatDisplayDate();
   elements.clockLabel.textContent = formatTime();
+  applyMissedClockOutFines();
   renderPanelTabs();
   renderEmployeePanelOptions();
   renderEmployeePanel();
   elements.weekendNotice.classList.toggle("hidden", !isWeekend());
-  elements.markMissedBtn.disabled = isWeekend();
+  renderRules();
+  elements.markMissedBtn.disabled = isWeekend() || !isFineActionEnabled();
   renderStats();
   renderReportOptions();
   renderEmployeeCards();
   renderRecordsTable();
 }
+
+elements.loginForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const userId = elements.loginUserId.value.trim();
+  const password = elements.loginPassword.value;
+
+  if (userId !== LOGIN_USER_ID || password !== LOGIN_PASSWORD) {
+    elements.loginError.classList.remove("hidden");
+    elements.loginPassword.select();
+    return;
+  }
+
+  sessionStorage.setItem("attendance-login", "true");
+  isLoggedIn = true;
+  elements.loginError.classList.add("hidden");
+  render();
+});
+
+elements.logoutBtn.addEventListener("click", () => {
+  sessionStorage.removeItem("attendance-login");
+  isLoggedIn = false;
+  activePanel = "employee";
+  elements.loginPassword.value = "";
+  render();
+});
 
 elements.employeeForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -558,6 +773,12 @@ elements.employeeForm.addEventListener("submit", (event) => {
 
 elements.exportBtn.addEventListener("click", exportReport);
 elements.markMissedBtn.addEventListener("click", applyMissedClockInFines);
+elements.rulesForm.addEventListener("submit", updateRules);
+elements.missedFineActionToggle.addEventListener("change", () => {
+  state.settings.missedFineActionEnabled = elements.missedFineActionToggle.checked;
+  saveState();
+  render();
+});
 elements.employeePanelSelect.addEventListener("change", render);
 elements.employeePanelTab.addEventListener("click", () => {
   activePanel = "employee";
@@ -583,6 +804,19 @@ elements.adminPasswordCancel.addEventListener("click", closeAdminPasswordModal);
 elements.adminPasswordModal.addEventListener("click", (event) => {
   if (event.target === elements.adminPasswordModal) {
     closeAdminPasswordModal();
+  }
+});
+elements.removeEmployeeForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (pendingRemoveEmployeeId) {
+    removeEmployee(pendingRemoveEmployeeId);
+  }
+  closeRemoveEmployeeModal();
+});
+elements.removeEmployeeCancel.addEventListener("click", closeRemoveEmployeeModal);
+elements.removeEmployeeModal.addEventListener("click", (event) => {
+  if (event.target === elements.removeEmployeeModal) {
+    closeRemoveEmployeeModal();
   }
 });
 elements.selfClockInBtn.addEventListener("click", () => clockIn(getSelectedEmployeeId()));

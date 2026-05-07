@@ -7,7 +7,37 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="app-shell">
+    <section id="loginScreen" class="login-screen">
+      <div class="login-visual">
+        <div class="brand-logo">Codelab</div>
+        <p class="eyebrow">CodeLab FZC LLC</p>
+        <h1>Attendance Control</h1>
+        <p>Secure access for employee attendance, leave tracking, admin rules, and fine management.</p>
+      </div>
+
+      <div class="login-side">
+        <form id="loginForm" class="login-card">
+          <div>
+            <p class="eyebrow">Secure Login</p>
+            <h2>Welcome Back</h2>
+          </div>
+          <label>
+            User ID
+            <input id="loginUserId" type="text" autocomplete="username" placeholder="Enter user ID" />
+          </label>
+          <label>
+            Password
+            <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter password" />
+          </label>
+          <p id="loginError" class="modal-error hidden">Invalid User ID or password.</p>
+          <button type="submit">Login</button>
+        </form>
+
+        <footer class="login-footer">Copyright 2022 All Rights Reserved Codelab FZC LLC</footer>
+      </div>
+    </section>
+
+    <main id="appShell" class="app-shell hidden">
       <header class="topbar">
         <div>
           <p class="eyebrow">CodeLab FZC LLC</p>
@@ -17,6 +47,7 @@
           <span id="todayLabel">Today</span>
           <strong id="clockLabel">--:--</strong>
         </div>
+        <button id="logoutBtn" class="logout-btn" type="button">Log Out</button>
       </header>
 
       <nav class="panel-tabs" aria-label="Application panels">
@@ -106,6 +137,7 @@
                   <th>Clock In</th>
                   <th>Clock Out</th>
                   <th>Hours</th>
+                  <th>Leave Days</th>
                   <th>Fine</th>
                 </tr>
               </thead>
@@ -139,9 +171,50 @@
           <div class="panel-heading">
             <div>
               <h2>Admin Attendance View</h2>
-              <p>Office hours: 8:00 AM to 6:00 PM, Monday to Friday. Saturday and Sunday are weekends.</p>
+              <p id="officeRuleText">Office hours: 8:00 AM to 6:00 PM, Monday to Friday. Saturday and Sunday are weekends.</p>
             </div>
-            <button id="markMissedBtn" class="ghost-btn" type="button">Apply Missed Clock-In Fine</button>
+          </div>
+
+          <div class="rules-panel">
+            <div>
+              <div class="rules-title-row">
+                <h3>Admin Action & Rules</h3>
+                <label class="switch-control">
+                  <input id="missedFineActionToggle" type="checkbox" />
+                  <span class="switch-track"></span>
+                  <strong id="missedFineActionLabel">On</strong>
+                </label>
+              </div>
+              <p>Change attendance rules, then apply the missed clock-in fine when needed.</p>
+            </div>
+            <form id="rulesForm" class="rules-form">
+              <label>
+                Check In Time
+                <input id="ruleCheckIn" type="text" placeholder="8:00 AM" />
+              </label>
+              <label>
+                Check Out Time
+                <input id="ruleCheckOut" type="text" placeholder="6:00 PM" />
+              </label>
+              <label>
+                Required Hours
+                <input id="ruleRequiredHours" type="text" inputmode="decimal" placeholder="10" />
+              </label>
+              <label>
+                Missed Fine BDT
+                <input id="ruleFine" type="text" inputmode="decimal" placeholder="50" />
+              </label>
+              <label>
+                Clock Out Deadline
+                <input id="ruleClockOutDeadline" type="text" placeholder="12:00 PM" />
+              </label>
+              <label>
+                Clock Out Fine BDT
+                <input id="ruleClockOutFine" type="text" inputmode="decimal" placeholder="50" />
+              </label>
+              <button type="submit">Save Rules</button>
+              <button id="markMissedBtn" class="ghost-btn" type="button">Apply Missed Clock-In Fine</button>
+            </form>
           </div>
 
           <div id="weekendNotice" class="notice hidden">
@@ -201,6 +274,7 @@
                   <th>Clock In</th>
                   <th>Clock Out</th>
                   <th>Hours</th>
+                  <th>Leave Days</th>
                   <th>Fine</th>
                 </tr>
               </thead>
@@ -225,6 +299,22 @@
         <div class="modal-actions">
           <button id="adminPasswordCancel" class="ghost-btn" type="button">Cancel</button>
           <button type="submit">Unlock Admin</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="removeEmployeeModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="removeEmployeeTitle">
+      <form id="removeEmployeeForm" class="password-modal">
+        <div>
+          <p class="eyebrow">Employee Remove</p>
+          <h2 id="removeEmployeeTitle">Remove Employee?</h2>
+        </div>
+        <p class="modal-copy">
+          Are you sure you want to remove <strong id="removeEmployeeName">this employee</strong>?
+        </p>
+        <div class="modal-actions">
+          <button id="removeEmployeeCancel" class="ghost-btn" type="button">Cancel</button>
+          <button class="danger-confirm-btn" type="submit">OK</button>
         </div>
       </form>
     </div>

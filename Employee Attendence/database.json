@@ -1,61 +1,56 @@
 {
   "employees": [
     {
-      "id": "c2738641-3063-4ae2-9cf7-da5cb456e3b0",
+      "id": "employee-1",
       "name": "Bashar",
       "active": true
     },
     {
-      "id": "945eec83-2ec4-4199-904e-7a04a35cf554",
+      "id": "employee-2",
       "name": "Jahid",
       "active": true
     },
     {
-      "id": "3f319006-277e-43c1-b370-2b0b531dfdc2",
+      "id": "employee-3",
       "name": "Tanvir",
       "active": true
     },
     {
-      "id": "13a78a34-55db-4729-9607-1de49f574e10",
+      "id": "employee-4",
       "name": "Shoheb",
       "active": true
     },
     {
-      "id": "8aeea3f9-4b9c-47cb-aa16-44ef4f4c201b",
+      "id": "employee-5",
       "name": "Shukanto",
       "active": true
     },
     {
-      "id": "b95ed53c-07d7-4b90-8340-79fa314ef37d",
+      "id": "employee-6",
       "name": "Rafi",
       "active": true
     },
     {
-      "id": "af205d9a-e2f8-4dab-ba25-a56e1e4547d4",
+      "id": "employee-7",
       "name": "Shafwan",
       "active": true
     },
     {
-      "id": "2b25a943-eecf-452a-ac7f-58d21a9723a0",
+      "id": "employee-8",
       "name": "Arnab",
       "active": true
     },
     {
-      "id": "fa5fb7ef-d26d-4a03-8d20-6d64b585845f",
+      "id": "employee-9",
       "name": "Faiyaz",
-      "active": true
-    },
-    {
-      "id": "4348408b-c4e2-4df1-a173-97e2e11f27ae",
-      "name": "Alam",
       "active": true
     }
   ],
   "records": [
     {
-      "id": "e89ea220-bf5e-41bc-99f3-35720482c5b5",
-      "employeeId": "c2738641-3063-4ae2-9cf7-da5cb456e3b0",
-      "date": "2026-05-01",
+      "id": "d196987d-269e-412c-83d5-7b83eb7825f3",
+      "employeeId": "employee-1",
+      "date": "2026-05-04",
       "status": "Not Started",
       "clockIn": "",
       "clockOut": "",
@@ -64,9 +59,9 @@
       "note": ""
     },
     {
-      "id": "9a20c28b-c1a2-4d1b-9e26-6367fae1c15c",
-      "employeeId": "945eec83-2ec4-4199-904e-7a04a35cf554",
-      "date": "2026-05-01",
+      "id": "5e3bc12f-9111-4bf7-8ca7-7fdb7c899b20",
+      "employeeId": "employee-2",
+      "date": "2026-05-04",
       "status": "Not Started",
       "clockIn": "",
       "clockOut": "",
@@ -75,9 +70,9 @@
       "note": ""
     },
     {
-      "id": "75fab915-7690-491f-93b2-2de7c3564e66",
-      "employeeId": "3f319006-277e-43c1-b370-2b0b531dfdc2",
-      "date": "2026-05-01",
+      "id": "e727ff93-d1bc-4ded-a55b-6844f4227c34",
+      "employeeId": "employee-3",
+      "date": "2026-05-04",
       "status": "Not Started",
       "clockIn": "",
       "clockOut": "",
@@ -86,9 +81,9 @@
       "note": ""
     },
     {
-      "id": "59e1541e-515c-4215-b3a2-d18c85fe3e2b",
-      "employeeId": "13a78a34-55db-4729-9607-1de49f574e10",
-      "date": "2026-05-01",
+      "id": "e55e3aa3-f42a-4748-bac4-f217ab261d77",
+      "employeeId": "employee-4",
+      "date": "2026-05-04",
       "status": "Not Started",
       "clockIn": "",
       "clockOut": "",
@@ -97,9 +92,9 @@
       "note": ""
     },
     {
-      "id": "fa88ad19-a9de-4279-a5fa-86ba3440c0a2",
-      "employeeId": "8aeea3f9-4b9c-47cb-aa16-44ef4f4c201b",
-      "date": "2026-05-01",
+      "id": "38f2bf21-e680-48a3-9b10-ccfd1f195a3c",
+      "employeeId": "employee-5",
+      "date": "2026-05-04",
       "status": "Not Started",
       "clockIn": "",
       "clockOut": "",
@@ -108,9 +103,9 @@
       "note": ""
     },
     {
-      "id": "332cf758-c7dc-4cd1-b25e-8c525598787a",
-      "employeeId": "b95ed53c-07d7-4b90-8340-79fa314ef37d",
-      "date": "2026-05-01",
+      "id": "3cdb4013-6689-4576-8614-bd10387db56a",
+      "employeeId": "employee-6",
+      "date": "2026-05-04",
       "status": "Not Started",
       "clockIn": "",
       "clockOut": "",
@@ -119,9 +114,9 @@
       "note": ""
     },
     {
-      "id": "a631b50c-c4b1-4383-b7f6-bbddf4f3e7fa",
-      "employeeId": "af205d9a-e2f8-4dab-ba25-a56e1e4547d4",
-      "date": "2026-05-01",
+      "id": "95a180a4-2a0e-40e7-8bbd-506d69f5d5d3",
+      "employeeId": "employee-7",
+      "date": "2026-05-04",
       "status": "Not Started",
       "clockIn": "",
       "clockOut": "",
@@ -130,20 +125,9 @@
       "note": ""
     },
     {
-      "id": "aa6be05f-d8c2-4802-bddb-3fd4670a0ff8",
-      "employeeId": "2b25a943-eecf-452a-ac7f-58d21a9723a0",
-      "date": "2026-05-01",
-      "status": "Clocked In",
-      "clockIn": "2026-05-01T06:09:48.616Z",
-      "clockOut": "",
-      "leaveType": "",
-      "fine": 0,
-      "note": ""
-    },
-    {
-      "id": "dc9f00ea-357d-43de-a156-44f9b7ee1252",
-      "employeeId": "fa5fb7ef-d26d-4a03-8d20-6d64b585845f",
-      "date": "2026-05-01",
+      "id": "ffd7c254-80bc-48c4-a2df-9b2a90c3cb36",
+      "employeeId": "employee-8",
+      "date": "2026-05-04",
       "status": "Not Started",
       "clockIn": "",
       "clockOut": "",
@@ -152,9 +136,306 @@
       "note": ""
     },
     {
-      "id": "b44677bf-9444-43e4-b545-907d7b5cf40c",
-      "employeeId": "4348408b-c4e2-4df1-a173-97e2e11f27ae",
-      "date": "2026-05-01",
+      "id": "0cc91002-d389-4cbc-bc3c-f9f12e0f97d2",
+      "employeeId": "employee-9",
+      "date": "2026-05-04",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "4519a04b-d5ca-405b-9e0f-1cbfe71f4e64",
+      "employeeId": "employee-1",
+      "date": "2026-05-05",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "1a6309df-8b3b-41ca-8163-b827e0b42719",
+      "employeeId": "employee-2",
+      "date": "2026-05-05",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "d1ae9964-5693-47fe-8024-7d99e4fb7fac",
+      "employeeId": "employee-3",
+      "date": "2026-05-05",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "b3337d67-dfbc-4b5c-9dd3-03d6fb3a53dd",
+      "employeeId": "employee-4",
+      "date": "2026-05-05",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "1e9261bc-04cf-4311-9fae-2cf4404dc791",
+      "employeeId": "employee-5",
+      "date": "2026-05-05",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "7b3d2993-736a-4636-b799-f502c89a45d6",
+      "employeeId": "employee-6",
+      "date": "2026-05-05",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "2326b49d-f4ad-4117-895b-698bd4794272",
+      "employeeId": "employee-7",
+      "date": "2026-05-05",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "ec9682b7-f4e2-4bc5-b8e3-8bc4f241fb5f",
+      "employeeId": "employee-8",
+      "date": "2026-05-05",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "91e1114c-c551-4dfd-a56a-15e6f7cd1cd8",
+      "employeeId": "employee-9",
+      "date": "2026-05-05",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "1c30f1e3-2f74-4417-b9bf-cf57250f4fe3",
+      "employeeId": "employee-1",
+      "date": "2026-05-06",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "1f084b9f-e762-4251-932b-94ba40b4b5f0",
+      "employeeId": "employee-2",
+      "date": "2026-05-06",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "0d043d8b-6095-4595-acf8-8c40101c51c4",
+      "employeeId": "employee-3",
+      "date": "2026-05-06",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "1a3124ec-0591-42b5-82f1-7d038b6f670a",
+      "employeeId": "employee-4",
+      "date": "2026-05-06",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "ad5977f3-7163-4b4c-8207-4bdbbe68e7a6",
+      "employeeId": "employee-5",
+      "date": "2026-05-06",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "b0ed619f-c35d-439b-9993-79ba988f8046",
+      "employeeId": "employee-6",
+      "date": "2026-05-06",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "056bb831-a0d4-4d8f-aafd-3b6f210a831d",
+      "employeeId": "employee-7",
+      "date": "2026-05-06",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "3ac289ab-c6a2-4e10-a71c-ffbbdf98d409",
+      "employeeId": "employee-8",
+      "date": "2026-05-06",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "6258dc61-5096-47e0-a827-4c32971121cd",
+      "employeeId": "employee-9",
+      "date": "2026-05-06",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "b8d59256-e758-41b4-a013-bca99cc2429e",
+      "employeeId": "employee-1",
+      "date": "2026-05-07",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "6c8516a4-f5de-4eac-888b-a352160d3cf2",
+      "employeeId": "employee-2",
+      "date": "2026-05-07",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "dddfbbeb-d306-48ea-ab04-3d36054c3aeb",
+      "employeeId": "employee-3",
+      "date": "2026-05-07",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "2b0b7b72-ab46-44d2-9f3b-e8cbd7cd3ead",
+      "employeeId": "employee-4",
+      "date": "2026-05-07",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "41ccc9e4-71a7-4a7e-978e-ab9dc9b0da66",
+      "employeeId": "employee-5",
+      "date": "2026-05-07",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "28c41e7d-4e98-4e3f-8fdf-8da6979dfc30",
+      "employeeId": "employee-6",
+      "date": "2026-05-07",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "7a3bab74-d8aa-4bb3-ae46-99db6f6ae27c",
+      "employeeId": "employee-7",
+      "date": "2026-05-07",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "0bda9e52-793a-4cff-bad2-b2a459ccd93f",
+      "employeeId": "employee-8",
+      "date": "2026-05-07",
+      "status": "Not Started",
+      "clockIn": "",
+      "clockOut": "",
+      "leaveType": "",
+      "fine": 0,
+      "note": ""
+    },
+    {
+      "id": "0773629a-a23d-48e9-924d-af53c070a8b6",
+      "employeeId": "employee-9",
+      "date": "2026-05-07",
       "status": "Not Started",
       "clockIn": "",
       "clockOut": "",
@@ -162,5 +443,14 @@
       "fine": 0,
       "note": ""
     }
-  ]
+  ],
+  "settings": {
+    "checkInTime": "08:00",
+    "checkOutTime": "18:00",
+    "requiredHours": 10,
+    "missedClockInFine": 20,
+    "missedFineActionEnabled": true,
+    "missedClockOutDeadline": "12:00 PM",
+    "missedClockOutFine": 20
+  }
 }

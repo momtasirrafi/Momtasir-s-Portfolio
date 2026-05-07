@@ -7,6 +7,15 @@ const port = Number(process.env.PORT || 5500);
 const root = path.dirname(fileURLToPath(import.meta.url));
 const databasePath = path.join(root, "database.json");
 const defaultDatabase = {
+  settings: {
+    checkInTime: "08:00",
+    checkOutTime: "18:00",
+    requiredHours: 10,
+    missedClockInFine: 20,
+    missedFineActionEnabled: true,
+    missedClockOutDeadline: "12:00 PM",
+    missedClockOutFine: 20,
+  },
   employees: [
     "Bashar",
     "Jahid",
@@ -44,7 +53,12 @@ function ensureDatabase() {
 
 function readDatabase() {
   ensureDatabase();
-  return fs.readFileSync(databasePath, "utf8");
+  const data = JSON.parse(fs.readFileSync(databasePath, "utf8"));
+  data.settings = {
+    ...defaultDatabase.settings,
+    ...(data.settings || {}),
+  };
+  return JSON.stringify(data, null, 2);
 }
 
 function writeDatabase(data) {
